@@ -36,4 +36,4 @@ wrf_bdy*
 compile_log.txt
 
 #Ignore WPS/
-WPS-4.0.2/*
+WPS/*
