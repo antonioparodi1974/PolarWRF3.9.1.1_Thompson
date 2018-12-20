@@ -1,0 +1,1136 @@
+None of WRF_EM_CORE, WRF_NMM_CORE, 
+        specified in shell environment.... 
+copying Registry/Registry.EM to Registry/Registry
+ 
+============================================================================================== 
+ 
+V3.9.1.1  
+ 
+Compiling: WRF_EM_CORE  
+WRFIO_NCD_LARGE_FILE_SUPPORT=1
+ 
+Linux bslscihub-ws8 3.10.0-327.36.2.el7.x86_64 #1 SMP Mon Oct 10 23:08:37 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
+ 
+GNU Fortran (GCC) 4.8.5 20150623 (Red Hat 4.8.5-4)
+Copyright (C) 2015 Free Software Foundation, Inc.
+
+GNU Fortran comes with NO WARRANTY, to the extent permitted by law.
+You may redistribute copies of GNU Fortran
+under the terms of the GNU General Public License.
+For more information about these matters, see the file named COPYING
+
+ 
+============================================================================================== 
+ 
+setting parallel make -j 2
+ 
+============================================================================================== 
+ 
+The following indicate the compilers selected to build the WRF system
+ 
+Serial Fortran compiler (mostly for tool generation):
+which SFC
+/usr/bin/gfortran
+ 
+Serial C compiler (mostly for tool generation):
+which SCC
+/usr/bin/gcc
+ 
+Fortran compiler for the model source code:
+which FC
+/usr/lib64/mvapich2/bin/mpif90
+Will use 'time' to report timing information
+ 
+C compiler for the model source code:
+which CC
+/usr/lib64/mvapich2/bin/mpicc
+ 
+============================================================================================== 
+ 
+make -i -r MODULE_DIRS="-I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include " ext
+make[1]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3'
+--------------------------------------
+( cd frame ; make -i -r externals )
+make[2]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame'
+( cd /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90 ; \
+          make -j 2 FC="gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4 " RANLIB="ranlib" \
+          CPP="/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp" AR="ar" ARFLAGS="ru" )
+make[3]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90'
+/bin/rm -f ESMF_Base.o
+sed -e "/\!.*'/s/'//g" ESMF_Base.F90 > ESMF_Base.b
+/bin/rm -f ESMF_Fraction.o
+sed -e "/\!.*'/s/'//g" ESMF_Fraction.F90 > ESMF_Fraction.b
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. ESMF_Base.b > ESMF_Base.f
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. ESMF_Fraction.b > ESMF_Fraction.f
+/bin/rm -f ESMF_Base.b
+/bin/rm -f ESMF_Fraction.b
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o ESMF_Base.o -c ESMF_Base.f
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o ESMF_Fraction.o -c ESMF_Fraction.f
+/bin/rm -f ESMF_BaseTime.o
+sed -e "/\!.*'/s/'//g" ESMF_BaseTime.F90 > ESMF_BaseTime.b
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. ESMF_BaseTime.b > ESMF_BaseTime.f
+/bin/rm -f ESMF_BaseTime.b
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o ESMF_BaseTime.o -c ESMF_BaseTime.f
+/bin/rm -f ESMF_Calendar.o
+sed -e "/\!.*'/s/'//g" ESMF_Calendar.F90 > ESMF_Calendar.b
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. ESMF_Calendar.b > ESMF_Calendar.f
+/bin/rm -f ESMF_Calendar.b
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o ESMF_Calendar.o -c ESMF_Calendar.f
+/bin/rm -f ESMF_TimeInterval.o
+/bin/rm -f ESMF_Stubs.o
+sed -e "/\!.*'/s/'//g" ESMF_TimeInterval.F90 > ESMF_TimeInterval.b
+sed -e "/\!.*'/s/'//g" ESMF_Stubs.F90 > ESMF_Stubs.b
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. ESMF_Stubs.b > ESMF_Stubs.f
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. ESMF_TimeInterval.b > ESMF_TimeInterval.f
+/bin/rm -f ESMF_Stubs.b
+/bin/rm -f ESMF_TimeInterval.b
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o ESMF_Stubs.o -c ESMF_Stubs.f
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o ESMF_TimeInterval.o -c ESMF_TimeInterval.f
+/bin/rm -f ESMF_Time.o
+sed -e "/\!.*'/s/'//g" ESMF_Time.F90 > ESMF_Time.b
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. ESMF_Time.b > ESMF_Time.f
+/bin/rm -f ESMF_Time.b
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o ESMF_Time.o -c ESMF_Time.f
+/bin/rm -f ESMF_Alarm.o
+sed -e "/\!.*'/s/'//g" ESMF_Alarm.F90 > ESMF_Alarm.b
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. ESMF_Alarm.b > ESMF_Alarm.f
+/bin/rm -f ESMF_Alarm.b
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o ESMF_Alarm.o -c ESMF_Alarm.f
+/bin/rm -f ESMF_Clock.o
+sed -e "/\!.*'/s/'//g" ESMF_Clock.F90 > ESMF_Clock.b
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. ESMF_Clock.b > ESMF_Clock.f
+/bin/rm -f ESMF_Clock.b
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o ESMF_Clock.o -c ESMF_Clock.f
+/bin/rm -f Meat.o
+/bin/rm -f ESMF_AlarmClock.o
+sed -e "/\!.*'/s/'//g" ESMF_AlarmClock.F90 > ESMF_AlarmClock.b
+sed -e "/\!.*'/s/'//g" Meat.F90 > Meat.b
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. ESMF_AlarmClock.b > ESMF_AlarmClock.f
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. Meat.b > Meat.f
+/bin/rm -f ESMF_AlarmClock.b
+/bin/rm -f Meat.b
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o ESMF_AlarmClock.o -c ESMF_AlarmClock.f
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o Meat.o -c Meat.f
+/bin/rm -f ESMF_Mod.o
+sed -e "/\!.*'/s/'//g" ESMF_Mod.F90 > ESMF_Mod.b
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. ESMF_Mod.b > ESMF_Mod.f
+/bin/rm -f ESMF_Mod.b
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o ESMF_Mod.o -c ESMF_Mod.f
+/bin/rm -f module_symbols_util.o
+sed -e "/\!.*'/s/'//g" module_symbols_util.F90 > module_symbols_util.b
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. module_symbols_util.b > module_symbols_util.f
+/bin/rm -f module_symbols_util.b
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o module_symbols_util.o -c module_symbols_util.f
+/bin/rm -f module_utility.o
+sed -e "/\!.*'/s/'//g" module_utility.F90 > module_utility.b
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -traditional-cpp -I. module_utility.b > module_utility.f
+/bin/rm -f module_utility.b
+gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o module_utility.o -c module_utility.f
+/bin/rm -f libesmf_time.a
+if [ "ar" != "lib.exe" ] ; then \
+          ar ru libesmf_time.a ESMF_Alarm.o ESMF_BaseTime.o ESMF_Clock.o ESMF_Time.o Meat.o ESMF_Base.o ESMF_Calendar.o ESMF_Fraction.o ESMF_TimeInterval.o ESMF_Stubs.o ESMF_Mod.o module_symbols_util.o module_utility.o ESMF_AlarmClock.o ; \
+        else \
+          ar /out:libesmf_time.a ESMF_Alarm.o ESMF_BaseTime.o ESMF_Clock.o ESMF_Time.o Meat.o ESMF_Base.o ESMF_Calendar.o ESMF_Fraction.o ESMF_TimeInterval.o ESMF_Stubs.o ESMF_Mod.o module_symbols_util.o module_utility.o ESMF_AlarmClock.o ; \
+        fi
+ranlib libesmf_time.a
+make[3]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90'
+( cd /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf ; \
+          make -j 2 NETCDFPATH="/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/.." RANLIB="ranlib" CPP="/lib/cpp -P -nostdinc" \
+          CC="gcc" CFLAGS="-w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0" \
+          FC="gfortran   -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4 " TRADFLAG="-traditional-cpp" AR="ar" ARFLAGS="ru" )
+make[3]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf'
+grep nf_format_64bit /cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include/netcdf.inc ;\
+                        a=$? ; export a ; \
+		if [ $a -a "$WRFIO_NCD_LARGE_FILE_SUPPORT" = "1" ] ; then \
+                          /lib/cpp -P -nostdinc -P -traditional-cpp -DWRFIO_NCD_LARGE_FILE_SUPPORT -I../ioapi_share wrf_io.F90 | m4 -Uinclude -Uindex -Ulen - > wrf_io.f ; \
+                        else \
+                          /lib/cpp -P -nostdinc -P -traditional-cpp -I../ioapi_share wrf_io.F90 | m4 -Uinclude -Uindex -Ulen - > wrf_io.f ; \
+                        fi
+/lib/cpp -P -nostdinc -P -traditional-cpp -I../ioapi_share module_wrfsi_static.F90 > module_wrfsi_static.f
+      integer nf_format_64bit
+      parameter (nf_format_64bit = 2)
+gfortran   -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o module_wrfsi_static.o -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include -I../ioapi_share -c module_wrfsi_static.f
+gfortran   -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o wrf_io.o -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include -I../ioapi_share -c wrf_io.f
+/lib/cpp -P -nostdinc -P -traditional-cpp -I../ioapi_share field_routines.F90 > field_routines.f
+gfortran   -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o field_routines.o -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include -I../ioapi_share -c field_routines.f
+/bin/rm -f libwrfio_nf.a
+if [ "ar" != "lib.exe" ] ; then \
+                          ar cr libwrfio_nf.a wrf_io.o field_routines.o module_wrfsi_static.o ; \
+                        else \
+                          ar /out:libwrfio_nf.a wrf_io.o field_routines.o module_wrfsi_static.o ; \
+                        fi
+ranlib libwrfio_nf.a
+make[3]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf'
+( cd /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/ioapi_share ; \
+          make -i -r NATIVE_RWORDSIZE="4" RWORDSIZE="4" AR="ar" ARFLAGS="ru" )
+make[3]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/ioapi_share'
+( /bin/rm -f ../../inc/wrf_io_flags.h foo_io_flags.h; \
+/bin/cp wrf_io_flags.h foo_io_flags.h; \
+if [ 4 -ne 4 ] ; then \
+  /bin/rm -f foo_io_flags.h; \
+  sed -e 's/104/105/' wrf_io_flags.h > foo_io_flags.h ;\
+fi ; \
+/bin/mv foo_io_flags.h ../../inc/wrf_io_flags.h )
+/bin/rm -f ../../inc/wrf_status_codes.h
+/bin/cp wrf_status_codes.h ../../inc
+make[3]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/ioapi_share'
+( cd /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib_share ; \
+          make -j 2 CC="gcc" CFLAGS="-w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0" RM="rm -f" RANLIB="ranlib" CPP="/lib/cpp -P -nostdinc" \
+          FC="gfortran  -I.  -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  " TRADFLAG="-traditional-cpp" AR="ar" ARFLAGS="ru" archive) 
+make[3]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib_share'
+make[4]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib_share'
+rm -f io_grib_share.o
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c get_region_center.c
+/lib/cpp -P -nostdinc  -traditional-cpp  -I. io_grib_share.F > io_grib_share.f90
+gfortran  -I.  -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4     -I. -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4     -c io_grib_share.f90
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gridnav.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c open_file.c
+ar ru ./libio_grib_share.a io_grib_share.o get_region_center.o gridnav.o open_file.o
+ranlib ./libio_grib_share.a
+make[4]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib_share'
+make[3]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib_share'
+( cd /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1 ; \
+          make -j 2 CC="gcc" CFLAGS="-w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0" RM="rm -f" RANLIB="ranlib" CPP="/lib/cpp -P -nostdinc" \
+          FC="gfortran  -I.  -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  " TRADFLAG="-traditional-cpp" AR="ar" ARFLAGS="ru" archive)
+make[3]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1'
+        Doing make archive on library subdirectory MEL_grib1
+make[4]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1/MEL_grib1'
+make[5]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1/MEL_grib1'
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c FTP_getfile.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c apply_bitmap.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c display_gribhdr.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gbyte.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c grib_dec.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c grib_enc.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c grib_seek.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribgetbds.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribgetbms.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribgetgds.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribgetpds.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribhdr2file.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribputbds.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribputgds.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribputpds.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c hdr_print.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c init_dec_struct.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c init_enc_struct.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c init_gribhdr.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c init_struct.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c ld_dec_lookup.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c ld_enc_input.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c ld_enc_lookup.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c ld_grib_origctrs.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c make_default_grbfn.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c make_grib_log.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c map_lvl.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c map_parm.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c pack_spatial.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c prt_inp_struct.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c upd_child_errmsg.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c prt_badmsg.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c swap.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c grib_uthin.c
+gcc  -I. -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c set_bytes.c
+ar ru ../libio_grib1.a FTP_getfile.o apply_bitmap.o display_gribhdr.o gbyte.o grib_dec.o grib_enc.o grib_seek.o gribgetbds.o gribgetbms.o gribgetgds.o gribgetpds.o gribhdr2file.o gribputbds.o gribputgds.o gribputpds.o hdr_print.o init_dec_struct.o init_enc_struct.o init_gribhdr.o init_struct.o ld_dec_lookup.o ld_enc_input.o ld_enc_lookup.o ld_grib_origctrs.o make_default_grbfn.o make_grib_log.o map_lvl.o map_parm.o pack_spatial.o prt_inp_struct.o upd_child_errmsg.o prt_badmsg.o swap.o grib_uthin.o set_bytes.o
+ranlib ../libio_grib1.a
+make[5]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1/MEL_grib1'
+make[4]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1/MEL_grib1'
+        Doing make archive on library subdirectory grib1_util
+make[4]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1/grib1_util'
+make[5]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1/grib1_util'
+gcc  -I. -I../MEL_grib1 -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c alloc_2d.c
+gcc  -I. -I../MEL_grib1 -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c read_grib.c
+gcc  -I. -I../MEL_grib1 -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c write_grib.c
+ar ru ../libio_grib1.a alloc_2d.o read_grib.o write_grib.o
+ranlib ../libio_grib1.a
+make[5]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1/grib1_util'
+make[4]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1/grib1_util'
+        Doing make archive on library subdirectory WGRIB
+make[4]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1/WGRIB'
+gcc -c -O wgrib_main.c
+gcc -c -O seekgrib.c
+gcc -c -O ibm2flt.c
+gcc -c -O readgrib.c
+gcc -c -O intpower.c
+gcc -c -O cnames.c
+gcc -c -O BDSunpk.c
+gcc -c -O flt2ieee.c
+gcc -c -O wrtieee.c
+gcc -c -O levels.c
+gcc -c -O PDStimes.c
+gcc -c -O missing.c
+gcc -c -O nceptable_reanal.c
+gcc -c -O nceptable_opn.c
+gcc -c -O ensemble.c
+gcc -c -O ombtable.c
+gcc -c -O ec_ext.c
+gcc -c -O gribtable.c
+gcc -c -O gds_grid.c
+gcc -c -O PDS_date.c
+gcc -c -O ectable_128.c
+gcc -c -O ectable_129.c
+gcc -c -O ectable_130.c
+gcc -c -O ectable_131.c
+gcc -c -O ectable_140.c
+gcc -c -O ectable_150.c
+gcc -c -O ectable_151.c
+gcc -c -O ectable_160.c
+gcc -c -O ectable_170.c
+gcc -c -O ectable_180.c
+gcc -c -O nceptab_129.c
+gcc -c -O dwdtable_002.c
+gcc -c -O dwdtable_201.c
+gcc -c -O dwdtable_202.c
+gcc -c -O dwdtable_203.c
+gcc -c -O cptectable_254.c
+gcc -c -O nceptab_130.c
+gcc -c -O nceptab_131.c
+gcc -o wgrib.exe wgrib_main.o seekgrib.o ibm2flt.o readgrib.o intpower.o cnames.o BDSunpk.o flt2ieee.o wrtieee.o levels.o PDStimes.o missing.o nceptable_reanal.o nceptable_opn.o ensemble.o ombtable.o ec_ext.o gribtable.o gds_grid.o PDS_date.o ectable_128.o ectable_129.o ectable_130.o ectable_131.o ectable_140.o ectable_150.o ectable_151.o ectable_160.o ectable_170.o ectable_180.o nceptab_129.o dwdtable_002.o dwdtable_201.o dwdtable_202.o dwdtable_203.o cptectable_254.o nceptab_130.o nceptab_131.o #-lm
+( cd .. ; \rm -f wgrib.exe ; \ln -sf WGRIB/wgrib.exe wgrib.exe ; cd WGRIB )
+make[4]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1/WGRIB'
+make[4]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1'
+gcc  -I. -I./MEL_grib1 -Igrib1_util -I../io_grib_share -I../ -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c grib1_routines.c
+gcc  -I. -I./MEL_grib1 -Igrib1_util -I../io_grib_share -I../ -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c gribmap.c
+rm -f io_grib1.o
+/lib/cpp -P -nostdinc  -traditional-cpp  -I. -I./MEL_grib1 -Igrib1_util -I../io_grib_share -I../ io_grib1.F > io_grib1.f90
+gfortran  -I.  -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4     -I. -I./MEL_grib1 -Igrib1_util -I../io_grib_share -I../ -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4     -c io_grib1.f90
+gcc  -I. -I./MEL_grib1 -Igrib1_util -I../io_grib_share -I../ -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0   -c trim.c
+ar ru ./libio_grib1.a grib1_routines.o gribmap.o io_grib1.o trim.o
+ranlib ./libio_grib1.a
+make[4]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1'
+make[3]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_grib1'
+( cd /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int ; \
+          make -j 2 CC="mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK " CFLAGS_LOCAL="-w -O3 -c " RM="rm -f" RANLIB="ranlib" CPP="/lib/cpp -P -nostdinc" \
+          FC="time mpif90 -f90=gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  " FGREP="fgrep -iq" \
+          TRADFLAG="-traditional-cpp" AR="ar" ARFLAGS="ru" ARCHFLAGS="-DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0" all )
+make[3]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int'
+rm -f module_internal_header_util.f
+awk '{print "#define", toupper($4), $6}' < ../../inc/intio_tags.h > io_int_idx_tags.h
+cp ../../frame/module_internal_header_util.F mod_int_hdr_util.b
+/lib/cpp -P -nostdinc -traditional-cpp -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 module_io_int_idx.F90 > module_io_int_idx.f
+/lib/cpp -P -nostdinc -traditional-cpp -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -I../../inc -I../ioapi_share mod_int_hdr_util.b > module_internal_header_util.f
+/lib/cpp -P -nostdinc -traditional-cpp -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 module_io_int_read.F90 > module_io_int_read.f
+rm -f mod_int_hdr_util.b
+Diffwrf io_int will be built later on in this compile. No need to rerun compile. 
+Diffwrf io_int will be built later on in this compile. No need to rerun compile. 
+Diffwrf io_int will be built later on in this compile. No need to rerun compile. 
+Diffwrf io_int will be built later on in this compile. No need to rerun compile. 
+Diffwrf io_int will be built later on in this compile. No need to rerun compile. 
+/lib/cpp -P -nostdinc -traditional-cpp -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0 test_io_idx.F90 > test_io_idx.f
+Diffwrf io_int will be built later on in this compile. No need to rerun compile. 
+time mpif90 -f90=gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o module_internal_header_util.o -c module_internal_header_util.f
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -o io_int_idx.o -c -w -O3 -c  io_int_idx.c
+time mpif90 -f90=gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -o module_io_int_idx.o -c module_io_int_idx.f
+time mpif90 -f90=gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../../frame -o module_io_int_read.o -c module_io_int_read.f
+/lib/cpp -P -nostdinc -traditional-cpp -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I../../inc -I../ioapi_share io_int.F90 | m4 -Uinclude -Uindex -Ulen - > io_int.f
+time mpif90 -f90=gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../../inc -I../ioapi_share -o io_int.o -c io_int.f
+rm -f libwrfio_int.a
+if [ `echo "time mpif90 -f90=gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  " | awk '{print $1}'` = "gfortran" ] ; then \
+	echo removing external declaration of iargc for gfortran ; \
+	/lib/cpp -P -nostdinc -traditional-cpp -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I../ioapi_share diffwrf.F90 | \
+	sed '/integer *, *external.*iargc/d' > diffwrf.f  ; \
+else \
+	/lib/cpp -P -nostdinc -traditional-cpp -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I../ioapi_share diffwrf.F90 > diffwrf.f  ; \
+fi ; \
+time mpif90 -f90=gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -c -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../ioapi_share diffwrf.f ; \
+
+ar ru libwrfio_int.a io_int.o io_int_idx.o module_io_int_idx.o module_io_int_read.o
+ranlib libwrfio_int.a
+time mpif90 -f90=gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -o test_io_idx test_io_idx.f -L. -lwrfio_int
+if [ -f ../../frame/pack_utils.o -a -f ../../frame/clog.o ] ; then \
+  time mpif90 -f90=gfortran   -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -I../ioapi_share -o diffwrf diffwrf.f \
+	../../frame/pack_utils.o ../../frame/module_internal_header_util.o ../../frame/module_driver_constants.o ../../frame/module_machine.o ../../frame/module_wrf_error.o ../../frame/wrf_debug.o  libwrfio_int.a ; \
+fi
+make[3]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int'
+( cd /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/fftpack/fftpack5 ; \
+          make -j 2 FC="gfortran" FFLAGS="  -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4 " RANLIB="ranlib" AR="ar" \
+          ARFLAGS="ru" CPP="/lib/cpp -P -nostdinc" CPPFLAGS="-DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp " RM="rm -f" )
+make[3]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/fftpack/fftpack5'
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  c1f2kb.F  > c1f2kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cfft1b.F  > cfft1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  c1f2kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cfft1b.f90
+rm -f -f cfft1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cmf3kf.F  > cmf3kf.f90
+rm -f -f c1f2kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cosqb1.F  > cosqb1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cmf3kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cosqb1.f90
+rm -f -f cosqb1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  costmi.F  > costmi.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  costmi.f90
+rm -f -f cmf3kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dcosq1f.F  > dcosq1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dcosq1f.f90
+rm -f -f costmi.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dfftb1.F  > dfftb1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dfftb1.f90
+rm -f -f dcosq1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mradb2.F  > mradb2.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mradb2.f90
+rm -f -f dfftb1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mrfti1.F  > mrfti1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mrfti1.f90
+rm -f -f mradb2.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r1fgkf.F  > r1fgkf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r1fgkf.f90
+rm -f -f mrfti1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  rfft2i.F  > rfft2i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  rfft2i.f90
+rm -f -f rfft2i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sinqmi.F  > sinqmi.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sinqmi.f90
+rm -f -f r1fgkf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  z1f2kf.F  > z1f2kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  z1f2kf.f90
+rm -f -f sinqmi.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zfft1f.F  > zfft1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zfft1f.f90
+rm -f -f zfft1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zmf4kb.F  > zmf4kb.f90
+rm -f -f z1f2kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  c1f2kf.F  > c1f2kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zmf4kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  c1f2kf.f90
+rm -f -f c1f2kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cfft1f.F  > cfft1f.f90
+rm -f -f zmf4kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cmf4kb.F  > cmf4kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cfft1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cmf4kb.f90
+rm -f -f cfft1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cosqf1.F  > cosqf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cosqf1.f90
+rm -f -f cmf4kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  d1f2kb.F  > d1f2kb.f90
+rm -f -f cosqf1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dcosq1i.F  > dcosq1i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  d1f2kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dcosq1i.f90
+rm -f -f d1f2kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dfftf1.F  > dfftf1.f90
+rm -f -f dcosq1i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mradb3.F  > mradb3.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dfftf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mradb3.f90
+rm -f -f dfftf1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  msntb1.F  > msntb1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  msntb1.f90
+rm -f -f mradb3.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r4_factor.F  > r4_factor.f90
+rm -f -f msntb1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r4_factor.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  rfftb1.F  > rfftb1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  rfftb1.f90
+rm -f -f r4_factor.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sint1b.F  > sint1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sint1b.f90
+rm -f -f rfftb1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  z1f3kb.F  > z1f3kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  z1f3kb.f90
+rm -f -f sint1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zfft1i.F  > zfft1i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zfft1i.f90
+rm -f -f zfft1i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zmf4kf.F  > zmf4kf.f90
+rm -f -f z1f3kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  c1f3kb.F  > c1f3kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zmf4kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  c1f3kb.f90
+rm -f -f c1f3kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cfft1i.F  > cfft1i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cfft1i.f90
+rm -f -f zmf4kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cmf4kf.F  > cmf4kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cmf4kf.f90
+rm -f -f cfft1i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cosqmb.F  > cosqmb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cosqmb.f90
+rm -f -f cosqmb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  d1f2kf.F  > d1f2kf.f90
+rm -f -f cmf4kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dcosqb1.F  > dcosqb1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  d1f2kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dcosqb1.f90
+rm -f -f d1f2kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dffti1.F  > dffti1.f90
+rm -f -f dcosqb1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mradb4.F  > mradb4.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dffti1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mradb4.f90
+rm -f -f dffti1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  msntf1.F  > msntf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  msntf1.f90
+rm -f -f msntf1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r4_mcfti1.F  > r4_mcfti1.f90
+rm -f -f mradb4.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  rfftf1.F  > rfftf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r4_mcfti1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  rfftf1.f90
+rm -f -f r4_mcfti1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sint1f.F  > sint1f.f90
+rm -f -f rfftf1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  z1f3kf.F  > z1f3kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sint1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  z1f3kf.f90
+rm -f -f sint1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zfft2b.F  > zfft2b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zfft2b.f90
+rm -f -f z1f3kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zmf5kb.F  > zmf5kb.f90
+rm -f -f zfft2b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  c1f3kf.F  > c1f3kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zmf5kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  c1f3kf.f90
+rm -f -f c1f3kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cfft2b.F  > cfft2b.f90
+rm -f -f zmf5kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cfft2b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cmf5kb.F  > cmf5kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cmf5kb.f90
+rm -f -f cfft2b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cosqmf.F  > cosqmf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cosqmf.f90
+rm -f -f cosqmf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  d1f3kb.F  > d1f3kb.f90
+rm -f -f cmf5kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dcosqf1.F  > dcosqf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  d1f3kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dcosqf1.f90
+rm -f -f dcosqf1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dsint1b.F  > dsint1b.f90
+rm -f -f d1f3kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dsint1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mradb5.F  > mradb5.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mradb5.f90
+rm -f -f dsint1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r1f2kb.F  > r1f2kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r1f2kb.f90
+rm -f -f r1f2kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r4_tables.F  > r4_tables.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r4_tables.f90
+rm -f -f r4_tables.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  rffti1.F  > rffti1.f90
+rm -f -f mradb5.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sint1i.F  > sint1i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  rffti1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sint1i.f90
+rm -f -f rffti1.f90
+rm -f -f sint1i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  z1f4kb.F  > z1f4kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zfft2f.F  > zfft2f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  z1f4kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zfft2f.f90
+rm -f -f zfft2f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zmf5kf.F  > zmf5kf.f90
+rm -f -f z1f4kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  c1f4kb.F  > c1f4kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zmf5kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  c1f4kb.f90
+rm -f -f c1f4kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cfft2f.F  > cfft2f.f90
+rm -f -f zmf5kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cmf5kf.F  > cmf5kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cfft2f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cmf5kf.f90
+rm -f -f cfft2f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cosqmi.F  > cosqmi.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cosqmi.f90
+rm -f -f cosqmi.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  d1f3kf.F  > d1f3kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  d1f3kf.f90
+rm -f -f cmf5kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dcost1b.F  > dcost1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dcost1b.f90
+rm -f -f dcost1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dsint1f.F  > dsint1f.f90
+rm -f -f d1f3kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mradbg.F  > mradbg.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dsint1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mradbg.f90
+rm -f -f dsint1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r1f2kf.F  > r1f2kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r1f2kf.f90
+rm -f -f r1f2kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r8_factor.F  > r8_factor.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r8_factor.f90
+rm -f -f mradbg.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  rfftmb.F  > rfftmb.f90
+rm -f -f r8_factor.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  rfftmb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sintb1.F  > sintb1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sintb1.f90
+rm -f -f rfftmb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  z1f4kf.F  > z1f4kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  z1f4kf.f90
+rm -f -f sintb1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zfft2i.F  > zfft2i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zfft2i.f90
+rm -f -f zfft2i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zmfgkb.F  > zmfgkb.f90
+rm -f -f z1f4kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  c1f4kf.F  > c1f4kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zmfgkb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  c1f4kf.f90
+rm -f -f c1f4kf.f90
+rm -f -f zmfgkb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cfft2i.F  > cfft2i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cmfgkb.F  > cmfgkb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cfft2i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cmfgkb.f90
+rm -f -f cfft2i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cost1b.F  > cost1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cost1b.f90
+rm -f -f cost1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  d1f4kb.F  > d1f4kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  d1f4kb.f90
+rm -f -f cmfgkb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dcost1f.F  > dcost1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dcost1f.f90
+rm -f -f dcost1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dsint1i.F  > dsint1i.f90
+rm -f -f d1f4kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mradf2.F  > mradf2.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dsint1i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mradf2.f90
+rm -f -f dsint1i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r1f3kb.F  > r1f3kb.f90
+rm -f -f mradf2.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r1f3kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r8_mcfti1.F  > r8_mcfti1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r8_mcfti1.f90
+rm -f -f r8_mcfti1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  rfftmf.F  > rfftmf.f90
+rm -f -f r1f3kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  rfftmf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sintf1.F  > sintf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sintf1.f90
+rm -f -f rfftmf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  z1f5kb.F  > z1f5kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  z1f5kb.f90
+rm -f -f sintf1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zfftmb.F  > zfftmb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zfftmb.f90
+rm -f -f zfftmb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zmfgkf.F  > zmfgkf.f90
+rm -f -f z1f5kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zmfgkf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  c1f5kb.F  > c1f5kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  c1f5kb.f90
+rm -f -f c1f5kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cfftmb.F  > cfftmb.f90
+rm -f -f zmfgkf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cmfgkf.F  > cmfgkf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cfftmb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cmfgkf.f90
+rm -f -f cfftmb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cost1f.F  > cost1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cost1f.f90
+rm -f -f cost1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  d1f4kf.F  > d1f4kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  d1f4kf.f90
+rm -f -f cmfgkf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dcost1i.F  > dcost1i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dcost1i.f90
+rm -f -f d1f4kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dsintb1.F  > dsintb1.f90
+rm -f -f dcost1i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mradf3.F  > mradf3.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dsintb1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mradf3.f90
+rm -f -f dsintb1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r1f3kf.F  > r1f3kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r1f3kf.f90
+rm -f -f mradf3.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r8_tables.F  > r8_tables.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r8_tables.f90
+rm -f -f r1f3kf.f90
+rm -f -f r8_tables.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  rfftmi.F  > rfftmi.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sintmb.F  > sintmb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  rfftmi.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sintmb.f90
+rm -f -f rfftmi.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  z1f5kf.F  > z1f5kf.f90
+rm -f -f sintmb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  z1f5kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zfftmf.F  > zfftmf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zfftmf.f90
+rm -f -f zfftmf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zmfm1b.F  > zmfm1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zmfm1b.f90
+rm -f -f z1f5kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  c1f5kf.F  > c1f5kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  c1f5kf.f90
+rm -f -f zmfm1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cfftmf.F  > cfftmf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cfftmf.f90
+rm -f -f cfftmf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cmfm1b.F  > cmfm1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cmfm1b.f90
+rm -f -f c1f5kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cost1i.F  > cost1i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cost1i.f90
+rm -f -f cmfm1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  d1f5kb.F  > d1f5kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  d1f5kb.f90
+rm -f -f cost1i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dcostb1.F  > dcostb1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dcostb1.f90
+rm -f -f dcostb1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dsintf1.F  > dsintf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dsintf1.f90
+rm -f -f d1f5kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mradf4.F  > mradf4.f90
+rm -f -f dsintf1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r1f4kb.F  > r1f4kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mradf4.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r1f4kb.f90
+rm -f -f mradf4.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  rfft1b.F  > rfft1b.f90
+rm -f -f r1f4kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sinq1b.F  > sinq1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  rfft1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sinq1b.f90
+rm -f -f rfft1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sintmf.F  > sintmf.f90
+rm -f -f sinq1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sintmf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  z1fgkb.F  > z1fgkb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  z1fgkb.f90
+rm -f -f sintmf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zfftmi.F  > zfftmi.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zfftmi.f90
+rm -f -f z1fgkb.f90
+rm -f -f zfftmi.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zmfm1f.F  > zmfm1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  c1fgkb.F  > c1fgkb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zmfm1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  c1fgkb.f90
+rm -f -f zmfm1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cfftmi.F  > cfftmi.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cfftmi.f90
+rm -f -f cfftmi.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cmfm1f.F  > cmfm1f.f90
+rm -f -f c1fgkb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  costb1.F  > costb1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cmfm1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  costb1.f90
+rm -f -f cmfm1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  d1f5kf.F  > d1f5kf.f90
+rm -f -f costb1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dcostf1.F  > dcostf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  d1f5kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dcostf1.f90
+rm -f -f dcostf1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mcsqb1.F  > mcsqb1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mcsqb1.f90
+rm -f -f mcsqb1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mradf5.F  > mradf5.f90
+rm -f -f d1f5kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r1f4kf.F  > r1f4kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mradf5.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r1f4kf.f90
+rm -f -f r1f4kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  rfft1f.F  > rfft1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  rfft1f.f90
+rm -f -f rfft1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sinq1f.F  > sinq1f.f90
+rm -f -f mradf5.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sintmi.F  > sintmi.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sinq1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sintmi.f90
+rm -f -f sinq1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  z1fgkf.F  > z1fgkf.f90
+rm -f -f sintmi.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zmf2kb.F  > zmf2kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  z1fgkf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zmf2kb.f90
+rm -f -f zmf2kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  c1fgkf.F  > c1fgkf.f90
+rm -f -f z1fgkf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cmf2kb.F  > cmf2kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  c1fgkf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cmf2kb.f90
+rm -f -f cmf2kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cosq1b.F  > cosq1b.f90
+rm -f -f c1fgkf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  costf1.F  > costf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cosq1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  costf1.f90
+rm -f -f cosq1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  d1fgkb.F  > d1fgkb.f90
+rm -f -f costf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  d1fgkb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dfft1b.F  > dfft1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dfft1b.f90
+rm -f -f dfft1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mcsqf1.F  > mcsqf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mcsqf1.f90
+rm -f -f d1fgkb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mradfg.F  > mradfg.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mradfg.f90
+rm -f -f mcsqf1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r1f5kb.F  > r1f5kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r1f5kb.f90
+rm -f -f mradfg.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  rfft1i.F  > rfft1i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  rfft1i.f90
+rm -f -f r1f5kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sinq1i.F  > sinq1i.f90
+rm -f -f rfft1i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  xercon.F  > xercon.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sinq1i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  xercon.f90
+rm -f -f sinq1i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  z1fm1b.F  > z1fm1b.f90
+rm -f -f xercon.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zmf2kf.F  > zmf2kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  z1fm1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zmf2kf.f90
+rm -f -f z1fm1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  c1fm1b.F  > c1fm1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  c1fm1b.f90
+rm -f -f zmf2kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cmf2kf.F  > cmf2kf.f90
+rm -f -f c1fm1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cosq1f.F  > cosq1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cmf2kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cosq1f.f90
+rm -f -f cosq1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  costmb.F  > costmb.f90
+rm -f -f cmf2kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  costmb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  d1fgkf.F  > d1fgkf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  d1fgkf.f90
+rm -f -f costmb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dfft1f.F  > dfft1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dfft1f.f90
+rm -f -f dfft1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mcstb1.F  > mcstb1.f90
+rm -f -f d1fgkf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mcstb1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mrftb1.F  > mrftb1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mrftb1.f90
+rm -f -f mcstb1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r1f5kf.F  > r1f5kf.f90
+rm -f -f mrftb1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  rfft2b.F  > rfft2b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r1f5kf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  rfft2b.f90
+rm -f -f rfft2b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sinqmb.F  > sinqmb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sinqmb.f90
+rm -f -f sinqmb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  xerfft.F  > xerfft.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  xerfft.f90
+rm -f -f r1f5kf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  z1fm1f.F  > z1fm1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  z1fm1f.f90
+rm -f -f xerfft.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zmf3kb.F  > zmf3kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zmf3kb.f90
+rm -f -f z1fm1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  c1fm1f.F  > c1fm1f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  c1fm1f.f90
+rm -f -f zmf3kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cmf3kb.F  > cmf3kb.f90
+rm -f -f c1fm1f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  cosq1i.F  > cosq1i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cmf3kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  cosq1i.f90
+rm -f -f cosq1i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  costmf.F  > costmf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  costmf.f90
+rm -f -f cmf3kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dcosq1b.F  > dcosq1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dcosq1b.f90
+rm -f -f costmf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  dfft1i.F  > dfft1i.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  dfft1i.f90
+rm -f -f dcosq1b.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mcstf1.F  > mcstf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mcstf1.f90
+rm -f -f dfft1i.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  mrftf1.F  > mrftf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  mrftf1.f90
+rm -f -f mcstf1.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  r1fgkb.F  > r1fgkb.f90
+rm -f -f mrftf1.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  r1fgkb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  rfft2f.F  > rfft2f.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  rfft2f.f90
+rm -f -f rfft2f.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  sinqmf.F  > sinqmf.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  sinqmf.f90
+rm -f -f r1fgkb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  z1f2kb.F  > z1f2kb.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  z1f2kb.f90
+rm -f -f sinqmf.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zfft1b.F  > zfft1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zfft1b.f90
+rm -f -f z1f2kb.f90
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  zmf3kf.F  > zmf3kf.f90
+rm -f -f zfft1b.f90
+gfortran -c -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  zmf3kf.f90
+rm -f -f zmf3kf.f90
+ar ru libfftpack.a c1f2kb.o  cfft1b.o  cmf3kf.o  cosqb1.o  costmi.o   dcosq1f.o  dfftb1.o   mradb2.o  mrfti1.o  r1fgkf.o     rfft2i.o  sinqmi.o  z1f2kf.o  zfft1f.o  zmf4kb.o c1f2kf.o  cfft1f.o  cmf4kb.o  cosqf1.o  d1f2kb.o   dcosq1i.o  dfftf1.o   mradb3.o  msntb1.o  r4_factor.o  rfftb1.o  sint1b.o  z1f3kb.o  zfft1i.o  zmf4kf.o c1f3kb.o  cfft1i.o  cmf4kf.o  cosqmb.o  d1f2kf.o   dcosqb1.o  dffti1.o   mradb4.o  msntf1.o  r4_mcfti1.o  rfftf1.o  sint1f.o  z1f3kf.o  zfft2b.o  zmf5kb.o c1f3kf.o  cfft2b.o  cmf5kb.o  cosqmf.o  d1f3kb.o   dcosqf1.o  dsint1b.o  mradb5.o  r1f2kb.o  r4_tables.o  rffti1.o  sint1i.o  z1f4kb.o  zfft2f.o  zmf5kf.o c1f4kb.o  cfft2f.o  cmf5kf.o  cosqmi.o  d1f3kf.o   dcost1b.o  dsint1f.o  mradbg.o  r1f2kf.o  r8_factor.o  rfftmb.o  sintb1.o  z1f4kf.o  zfft2i.o  zmfgkb.o c1f4kf.o  cfft2i.o  cmfgkb.o  cost1b.o  d1f4kb.o   dcost1f.o  dsint1i.o  mradf2.o  r1f3kb.o  r8_mcfti1.o  rfftmf.o  sintf1.o  z1f5kb.o  zfftmb.o  zmfgkf.o c1f5kb.o  cfftmb.o  cmfgkf.o  cost1f.o  d1f4kf.o   dcost1i.o  dsintb1.o  mradf3.o  r1f3kf.o  r8_tables.o  rfftmi.o  sintmb.o  z1f5kf.o  zfftmf.o  zmfm1b.o c1f5kf.o  cfftmf.o  cmfm1b.o  cost1i.o  d1f5kb.o   dcostb1.o  dsintf1.o  mradf4.o  r1f4kb.o  rfft1b.o     sinq1b.o  sintmf.o  z1fgkb.o  zfftmi.o  zmfm1f.o c1fgkb.o  cfftmi.o  cmfm1f.o  costb1.o  d1f5kf.o   dcostf1.o  mcsqb1.o   mradf5.o  r1f4kf.o  rfft1f.o     sinq1f.o  sintmi.o  z1fgkf.o  zmf2kb.o c1fgkf.o  cmf2kb.o  cosq1b.o  costf1.o  d1fgkb.o   dfft1b.o   mcsqf1.o   mradfg.o  r1f5kb.o  rfft1i.o     sinq1i.o  xercon.o  z1fm1b.o  zmf2kf.o c1fm1b.o  cmf2kf.o  cosq1f.o  costmb.o  d1fgkf.o   dfft1f.o   mcstb1.o   mrftb1.o  r1f5kf.o  rfft2b.o     sinqmb.o  xerfft.o  z1fm1f.o  zmf3kb.o c1fm1f.o  cmf3kb.o  cosq1i.o  costmf.o  dcosq1b.o  dfft1i.o   mcstf1.o   mrftf1.o  r1fgkb.o  rfft2f.o     sinqmf.o  z1f2kb.o  zfft1b.o  zmf3kf.o 
+ranlib libfftpack.a
+make[3]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/fftpack/fftpack5'
+( cd /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/RSL_LITE ; make -j 2 CC="mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0" \
+          FC="time mpif90 -f90=gfortran -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4    -fconvert=big-endian -frecord-marker=4" \
+          CPP="/lib/cpp -P -nostdinc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -traditional-cpp" AR="ar" ARFLAGS="ru" ;\
+          ranlib /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/RSL_LITE/librsl_lite.a )
+make[3]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/RSL_LITE'
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c c_code.c
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c buf_for_proc.c
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c rsl_malloc.c
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c rsl_bcast.c
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c task_for_point.c
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c period.c
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c swap.c
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0  -c cycle.c
+/lib/cpp -P -nostdinc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -traditional-cpp  f_pack.F90 > f_pack.f
+time mpif90 -f90=gfortran -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4    -fconvert=big-endian -frecord-marker=4 -o f_pack.o  -c f_pack.f
+/lib/cpp -P -nostdinc -I. -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -traditional-cpp f_xpose.F90 > f_xpose.f
+time mpif90 -f90=gfortran -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4    -fconvert=big-endian -frecord-marker=4 -o f_xpose.o  -c f_xpose.f
+/bin/rm -f librsl_lite.a
+ar cr librsl_lite.a c_code.o buf_for_proc.o rsl_malloc.o rsl_bcast.o task_for_point.o period.o swap.o cycle.o f_pack.o f_xpose.o
+make[3]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/RSL_LITE'
+( if [ ! -e /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/gen_comms.c ] ; then \
+          /bin/cp /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/gen_comms_warning /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/gen_comms.c ; \
+          cat /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/RSL_LITE/gen_comms.c >> /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/gen_comms.c ; fi )
+( if [ ! -e module_dm.F ] ; then /bin/cp module_dm_warning module_dm.F ; \
+          cat /data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/RSL_LITE/module_dm.F >> module_dm.F ; fi )
+make[2]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame'
+make[1]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3'
+make -i -r MODULE_DIRS="-I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include " toolsdir
+make[1]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3'
+--------------------------------------
+( cd tools ; make -i -r CC_TOOLS_CFLAGS="-DNMM_CORE=0" CC_TOOLS="gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25" )
+make[2]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools'
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  registry.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  my_strtok.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  reg_parse.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  data.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  type.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  misc.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_defs.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_allocs.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_mod_state_descr.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_scalar_indices.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_args.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_config.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  sym.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  symtab_gen.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_model_data_ord.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_interp.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_comms.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_scalar_derefs.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  set_dim_strs.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_wrf_io.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  gen_streams.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -DNMM_CORE=0  -c -g  standard.c
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -o standard.exe -g   standard.o
+gcc  -DIWORDSIZE=4 -DMAX_HISTORY=25 -o registry -g   registry.o my_strtok.o reg_parse.o data.o type.o misc.o gen_defs.o gen_allocs.o gen_mod_state_descr.o gen_scalar_indices.o gen_args.o gen_config.o sym.o symtab_gen.o gen_model_data_ord.o gen_interp.o gen_comms.o gen_scalar_derefs.o set_dim_strs.o gen_wrf_io.o gen_streams.o
+make[2]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools'
+make[1]: Leaving directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3'
+/bin/rm -f main/libwrflib.a main/libwrflib.lib
+make -i -r MODULE_DIRS="-I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include " framework
+make[1]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3'
+--------------------------------------
+( cd frame ; make -i -r -j 2 framework; \
+          cd ../external/io_netcdf ; \
+          make -i -r NETCDFPATH="/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/.." \
+               FC="time mpif90 -f90=gfortran -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4    " RANLIB="ranlib" \
+               CPP="/lib/cpp -P -nostdinc" LDFLAGS=" -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   " TRADFLAG="-traditional-cpp" ESMF_IO_LIB_EXT="-L/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90 -lesmf_time" \
+       LIB_LOCAL="" \
+               ESMF_MOD_DEPENDENCE="/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90/module_utility.o" AR="INTERNAL_BUILD_ERROR_SHOULD_NOT_NEED_AR" diffwrf; \
+          cd ../io_netcdf ; \
+          make -i -r NETCDFPATH="/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/.." \
+               FC="gfortran -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4    " RANLIB="ranlib" \
+               CPP="/lib/cpp -P -nostdinc" LDFLAGS=" -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   " TRADFLAG="-traditional-cpp" ESMF_IO_LIB_EXT="-L/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90 -lesmf_time" \
+       LIB_LOCAL="" \
+               ESMF_MOD_DEPENDENCE="/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90/module_utility.o" AR="INTERNAL_BUILD_ERROR_SHOULD_NOT_NEED_AR"; \
+          cd ../io_pio ; \
+          echo SKIPPING PIO BUILD make -i -r NETCDFPATH="" \
+               FC="gfortran -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4    " RANLIB="ranlib" \
+               CPP="/lib/cpp -P -nostdinc" LDFLAGS=" -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   " TRADFLAG="-traditional-cpp" ESMF_IO_LIB_EXT="-L/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90 -lesmf_time" \
+       LIB_LOCAL="" \
+               ESMF_MOD_DEPENDENCE="/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90/module_utility.o" AR="INTERNAL_BUILD_ERROR_SHOULD_NOT_NEED_AR"; \
+          cd ../io_int ; \
+          make -i -r SFC="gfortran -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4 " \
+               FC="gfortran -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4    " \
+               RANLIB="ranlib" CPP="/lib/cpp -P -nostdinc -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE" DM_FC="mpif90 -f90=gfortran -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4 "\
+               TRADFLAG="-traditional-cpp" ESMF_IO_LIB_EXT="-L/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90 -lesmf_time" \
+               ESMF_MOD_DEPENDENCE="/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90/module_utility.o" AR="INTERNAL_BUILD_ERROR_SHOULD_NOT_NEED_AR" diffwrf ; \
+          cd ../../frame )
+make[2]: Entering directory `/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame'
+( cd .. ; tools/registry -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -DNEW_BDYS Registry/Registry ) ; 
+rm -f wrf_shutdown.o
+sed -e "s/grid%mu/gridmu/g" -e "s/grid%Mu/gridMu/g" -e "s/^\!.*'.*//" -e "s/^ *\!.*'.*//" wrf_shutdown.F > wrf_shutdown.G
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   wrf_shutdown.G  > wrf_shutdown.H
+sed -e "s/gridmu/grid%mu/g" -e "s/gridMu/grid%Mu/g" wrf_shutdown.H > wrf_shutdown.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe wrf_shutdown.bb | /lib/cpp -P -nostdinc -traditional-cpp > wrf_shutdown.f90
+rm -f wrf_shutdown.G wrf_shutdown.H wrf_shutdown.bb
+time mpif90 -f90=gfortran -o wrf_shutdown.o -c -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include    wrf_shutdown.f90
+rm -f clog.o
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -o clog.o -c -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0 clog.c
+rm -f hires_timer.o
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -o hires_timer.o -c -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0 hires_timer.c
+rm -f ../share/module_model_constants.o
+sed -e "s/grid%mu/gridmu/g" -e "s/grid%Mu/gridMu/g" -e "s/^\!.*'.*//" -e "s/^ *\!.*'.*//" ../share/module_model_constants.F > ../share/module_model_constants.G
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   ../share/module_model_constants.G  > ../share/module_model_constants.H
+sed -e "s/gridmu/grid%mu/g" -e "s/gridMu/grid%Mu/g" ../share/module_model_constants.H > ../share/module_model_constants.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe ../share/module_model_constants.bb | /lib/cpp -P -nostdinc -traditional-cpp > ../share/module_model_constants.f90
+rm -f ../share/module_model_constants.G ../share/module_model_constants.H ../share/module_model_constants.bb
+time mpif90 -f90=gfortran -o ../share/module_model_constants.o -c -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include    ../share/module_model_constants.f90
+if [ "m4 -G" = NA ] ; then \
+  /bin/cp ../arch/md_calls.inc . ; \
+else \
+  m4 -G md_calls.m4 > md_calls.inc ; \
+fi
+/lib/cpp -P -nostdinc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp  -I../inc module_internal_header_util.F > module_internal_header_util.f90
+gfortran -c    -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  module_internal_header_util.f90
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -c -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0 wrf_num_bytes_between.c
+rm -f libmassv.o
+sed -e "s/grid%mu/gridmu/g" -e "s/grid%Mu/gridMu/g" -e "s/^\!.*'.*//" -e "s/^ *\!.*'.*//" libmassv.F > libmassv.G
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   libmassv.G  > libmassv.H
+sed -e "s/gridmu/grid%mu/g" -e "s/gridMu/grid%Mu/g" libmassv.H > libmassv.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe libmassv.bb | /lib/cpp -P -nostdinc -traditional-cpp > libmassv.f90
+rm -f libmassv.G libmassv.H libmassv.bb
+time mpif90 -f90=gfortran -o libmassv.o -c -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include    libmassv.f90
+rm -f collect_on_comm.o
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -o collect_on_comm.o -c -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0 collect_on_comm.c
+mpicc -cc=gcc -DMPI2_SUPPORT -DFSEEKO64_OK  -c -w -O3 -c  -DDM_PARALLEL -DMAX_HISTORY=25 -DNMM_CORE=0 -DIWORDSIZE=4 pack_utils.c
+rm -f module_wrf_error.o
+sed -e "s/grid%mu/gridmu/g" -e "s/grid%Mu/gridMu/g" -e "s/^\!.*'.*//" -e "s/^ *\!.*'.*//" module_wrf_error.F > module_wrf_error.G
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_wrf_error.G  > module_wrf_error.H
+sed -e "s/gridmu/grid%mu/g" -e "s/gridMu/grid%Mu/g" module_wrf_error.H > module_wrf_error.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_wrf_error.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_wrf_error.f90
+rm -f module_wrf_error.G module_wrf_error.H module_wrf_error.bb
+time mpif90 -f90=gfortran -o module_wrf_error.o -c -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include    module_wrf_error.f90
+rm -f module_sm.o
+sed -e "s/grid%mu/gridmu/g" -e "s/grid%Mu/gridMu/g" -e "s/^\!.*'.*//" -e "s/^ *\!.*'.*//" module_sm.F > module_sm.G
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_sm.G  > module_sm.H
+sed -e "s/gridmu/grid%mu/g" -e "s/gridMu/grid%Mu/g" module_sm.H > module_sm.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_sm.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_sm.f90
+rm -f module_sm.G module_sm.H module_sm.bb
+time mpif90 -f90=gfortran -o module_sm.o -c -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include    module_sm.f90
+rm -f wrf_debug.o
+sed -e "s/grid%mu/gridmu/g" -e "s/grid%Mu/gridMu/g" -e "s/^\!.*'.*//" -e "s/^ *\!.*'.*//" wrf_debug.F > wrf_debug.G
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   wrf_debug.G  > wrf_debug.H
+sed -e "s/gridmu/grid%mu/g" -e "s/gridMu/grid%Mu/g" wrf_debug.H > wrf_debug.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe wrf_debug.bb | /lib/cpp -P -nostdinc -traditional-cpp > wrf_debug.f90
+rm -f wrf_debug.G wrf_debug.H wrf_debug.bb
+time mpif90 -f90=gfortran -o wrf_debug.o -c -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include    wrf_debug.f90
+rm -f module_state_description.o
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_state_description.F  > module_state_description.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_state_description.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_state_description.f90
+rm -f module_state_description.b module_state_description.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_state_description.f90
+rm -f module_driver_constants.o
+rm -f module_streams.o
+sed -e "s/grid%mu/gridmu/g" -e "s/grid%Mu/gridMu/g" -e "s/^\!.*'.*//" -e "s/^ *\!.*'.*//" module_driver_constants.F > module_driver_constants.G
+sed -e "s/grid%mu/gridmu/g" -e "s/grid%Mu/gridMu/g" -e "s/^\!.*'.*//" -e "s/^ *\!.*'.*//" module_streams.F > module_streams.G
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_driver_constants.G  > module_driver_constants.H
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_streams.G  > module_streams.H
+sed -e "s/gridmu/grid%mu/g" -e "s/gridMu/grid%Mu/g" module_driver_constants.H > module_driver_constants.bb
+sed -e "s/gridmu/grid%mu/g" -e "s/gridMu/grid%Mu/g" module_streams.H > module_streams.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_driver_constants.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_driver_constants.f90
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_streams.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_streams.f90
+rm -f module_driver_constants.G module_driver_constants.H module_driver_constants.bb
+rm -f module_streams.G module_streams.H module_streams.bb
+time mpif90 -f90=gfortran -o module_driver_constants.o -c -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include    module_driver_constants.f90
+time mpif90 -f90=gfortran -o module_streams.o -c -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include    module_streams.f90
+rm -f module_timing.o
+sed -e "s/grid%mu/gridmu/g" -e "s/grid%Mu/gridMu/g" -e "s/^\!.*'.*//" -e "s/^ *\!.*'.*//" module_timing.F > module_timing.G
+rm -f module_domain_type.o
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_domain_type.F  > module_domain_type.bb
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_timing.G  > module_timing.H
+sed -e "s/gridmu/grid%mu/g" -e "s/gridMu/grid%Mu/g" module_timing.H > module_timing.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_domain_type.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_domain_type.f90
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_timing.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_timing.f90
+rm -f module_timing.G module_timing.H module_timing.bb
+time mpif90 -f90=gfortran -o module_timing.o -c -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include    module_timing.f90
+rm -f module_domain_type.b module_domain_type.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_domain_type.f90
+rm -f module_machine.o
+sed -e "s/grid%mu/gridmu/g" -e "s/grid%Mu/gridMu/g" -e "s/^\!.*'.*//" -e "s/^ *\!.*'.*//" module_machine.F > module_machine.G
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_machine.G  > module_machine.H
+sed -e "s/gridmu/grid%mu/g" -e "s/gridMu/grid%Mu/g" module_machine.H > module_machine.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_machine.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_machine.f90
+rm -f module_machine.G module_machine.H module_machine.bb
+time mpif90 -f90=gfortran -o module_machine.o -c -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include    module_machine.f90
+rm -f module_quilt_outbuf_ops.o
+sed -e "s/grid%mu/gridmu/g" -e "s/grid%Mu/gridMu/g" -e "s/^\!.*'.*//" -e "s/^ *\!.*'.*//" module_quilt_outbuf_ops.F > module_quilt_outbuf_ops.G
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_quilt_outbuf_ops.G  > module_quilt_outbuf_ops.H
+rm -f module_configure.o
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_configure.F  > module_configure.bb
+sed -e "s/gridmu/grid%mu/g" -e "s/gridMu/grid%Mu/g" module_quilt_outbuf_ops.H > module_quilt_outbuf_ops.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_quilt_outbuf_ops.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_quilt_outbuf_ops.f90
+rm -f module_quilt_outbuf_ops.G module_quilt_outbuf_ops.H module_quilt_outbuf_ops.bb
+time mpif90 -f90=gfortran -o module_quilt_outbuf_ops.o -c -O2 -ftree-vectorize -funroll-loops -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4   -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include    module_quilt_outbuf_ops.f90
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_configure.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_configure.f90
+rm -f module_configure.b module_configure.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_configure.f90
+rm -f module_alloc_space_0.o
+rm -f module_alloc_space_1.o
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_alloc_space_0.F  > module_alloc_space_0.bb
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_alloc_space_1.F  > module_alloc_space_1.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_alloc_space_0.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_alloc_space_0.f90
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_alloc_space_1.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_alloc_space_1.f90
+rm -f module_alloc_space_1.b module_alloc_space_1.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_alloc_space_1.f90
+rm -f module_alloc_space_0.b module_alloc_space_0.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_alloc_space_0.f90
+rm -f module_alloc_space_2.o
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_alloc_space_2.F  > module_alloc_space_2.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_alloc_space_2.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_alloc_space_2.f90
+rm -f module_alloc_space_3.o
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_alloc_space_3.F  > module_alloc_space_3.bb
+rm -f module_alloc_space_2.b module_alloc_space_2.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_alloc_space_2.f90
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_alloc_space_3.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_alloc_space_3.f90
+rm -f module_alloc_space_3.b module_alloc_space_3.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_alloc_space_3.f90
+rm -f module_alloc_space_4.o
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_alloc_space_4.F  > module_alloc_space_4.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_alloc_space_4.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_alloc_space_4.f90
+rm -f module_alloc_space_4.b module_alloc_space_4.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_alloc_space_4.f90
+rm -f module_alloc_space_5.o
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_alloc_space_5.F  > module_alloc_space_5.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_alloc_space_5.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_alloc_space_5.f90
+rm -f module_alloc_space_5.b module_alloc_space_5.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_alloc_space_5.f90
+rm -f module_alloc_space_6.o
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_alloc_space_6.F  > module_alloc_space_6.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_alloc_space_6.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_alloc_space_6.f90
+rm -f module_alloc_space_6.b module_alloc_space_6.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_alloc_space_6.f90
+rm -f module_alloc_space_7.o
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_alloc_space_7.F  > module_alloc_space_7.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_alloc_space_7.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_alloc_space_7.f90
+rm -f module_alloc_space_7.b module_alloc_space_7.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_alloc_space_7.f90
+rm -f module_alloc_space_8.o
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_alloc_space_8.F  > module_alloc_space_8.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_alloc_space_8.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_alloc_space_8.f90
+rm -f module_alloc_space_8.b module_alloc_space_8.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_alloc_space_8.f90
+rm -f module_alloc_space_9.o
+/lib/cpp -P -nostdinc -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -DEM_CORE=1 -DNMM_CORE=0 -DNMM_MAX_DIM=2600 -DCOAMPS_CORE=0 -DDA_CORE=0 -DEXP_CORE=0 -DIWORDSIZE=4 -DDWORDSIZE=8 -DRWORDSIZE=4 -DLWORDSIZE=4 -DNONSTANDARD_SYSTEM_SUBR  -DWRF_USE_CLM -DNO_IEEE_MODULE  -DDM_PARALLEL -DNETCDF -DUSE_ALLOCATABLES -DGRIB1 -DINTIO -DKEEP_INT_AROUND -DLIMIT_ARGS -DCONFIG_BUF_LEN=65536 -DMAX_DOMAINS_F=21 -DMAX_HISTORY=25 -DNMM_NEST=0  -I. -traditional-cpp   module_alloc_space_9.F  > module_alloc_space_9.bb
+/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/tools/standard.exe module_alloc_space_9.bb | /lib/cpp -P -nostdinc -traditional-cpp > module_alloc_space_9.f90
+rm -f module_alloc_space_9.b module_alloc_space_9.bb
+time mpif90 -f90=gfortran -c   -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4  -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include  module_alloc_space_9.f90
+/lib/cpp -P -nostdinc -DNNN=0 -I../inc -DNL_get_ROUTINES nl_access_routines.F > yy0.f90
+time mpif90 -f90=gfortran -o nl_get_0_routines.o -c  -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4 -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include   yy0.f90
+/lib/cpp -P -nostdinc -DNNN=1 -I../inc -DNL_get_ROUTINES nl_access_routines.F > yy1.f90
+time mpif90 -f90=gfortran -o nl_get_1_routines.o -c  -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4 -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include   yy1.f90
+rm -f yy0.f90
+/lib/cpp -P -nostdinc -DNNN=2 -I../inc -DNL_get_ROUTINES nl_access_routines.F > yy2.f90
+time mpif90 -f90=gfortran -o nl_get_2_routines.o -c  -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4 -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include   yy2.f90
+rm -f yy1.f90
+/lib/cpp -P -nostdinc -DNNN=3 -I../inc -DNL_get_ROUTINES nl_access_routines.F > yy3.f90
+time mpif90 -f90=gfortran -o nl_get_3_routines.o -c  -O0 -w -ffree-form -ffree-line-length-none -fconvert=big-endian -frecord-marker=4 -I../dyn_em -I../dyn_nmm   -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/esmf_time_f90  -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/main -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_netcdf -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/external/io_int -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/frame -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/share -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/phys -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/chem -I/data/scihub-users/giyoung/PWRF_V3.9.1.1/WRFV3/inc -I/cluster-packages/apps/netcdf/gcc/el7/4.4.1.1/lib/../include   yy3.f90
