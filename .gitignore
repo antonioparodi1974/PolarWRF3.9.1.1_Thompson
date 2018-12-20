@@ -39,6 +39,7 @@ WRFV3/test/*
 WRFV3/inc/*
 WRFV3/tools/*
 WRFV3/frame/*
+namelist.input.backup*
 
 #Ignore WPS/
 WPS/*
