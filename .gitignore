@@ -1,3 +1,16 @@
+# .gitignore (copied from WRF .gitignore)                                    #
+#                                                                            #
+# Filenames and wildcards added below will not be tracked by git in any      #
+# directory in the repository                                                #
+#                                                                            #
+# Ignored file types should include executables, build-time temporary files, #
+# and other files which should not ever be added to the code repository.     #
+#                                                                            #
+# USE CAUTION WHEN ADDING WILDCARDS, as some builds use different filename   #
+# conventions than others                                                    #
+##############################################################################
+
+
 # Ignore figures
 *.svg
 *.png
@@ -5,4 +18,22 @@
 Figures/*
 
 #Ignore tar files
+tarfiles/*
 *.tar.gz
+
+#WRF-specific wildcards
+*.exe
+*.o
+*.mod
+*.a
+*.backup
+*.f90
+WPS-4.0.1/
+gitignore.txt
+met_em*
+wrf_input*
+wrf_bdy*
+compile_log.txt
+
+#Ignore WPS/
+WPS-4.0.2/*
