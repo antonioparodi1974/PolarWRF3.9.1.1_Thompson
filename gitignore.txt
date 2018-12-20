@@ -1,0 +1,8 @@
+# Ignore figures
+*.svg
+*.png
+*.pdf
+Figures/*
+
+#Ignore tar files
+*.tar.gz
