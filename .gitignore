@@ -34,6 +34,8 @@ met_em*
 wrf_input*
 wrf_bdy*
 compile_log.txt
+WRFV3/external/*
+WRFV3/test*
 
 #Ignore WPS/
 WPS/*

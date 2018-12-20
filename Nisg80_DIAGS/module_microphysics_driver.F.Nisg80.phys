@@ -75,6 +75,7 @@ SUBROUTINE microphysics_driver(                                          &
                       ,qv_b4mp, qc_b4mp, qi_b4mp, qs_b4mp                &
 #endif
                       ,qnwfa2d                                           & ! for water/ice-friendly aerosols
+                      ,nisg80,qisg80                                     & ! GYoung                      
                       ,refl_10cm                                         & ! HM, 9/22/09, add for refl
                       ,vmi3d                                             & ! for P3 
                       ,di3d                                              & ! for P3 
@@ -457,6 +458,7 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
    LOGICAL,  OPTIONAL,   INTENT(IN   )    :: channel_switch
    REAL, OPTIONAL,  INTENT(INOUT   ) :: naer  ! aerosol number concentration (/kg)
    REAL, DIMENSION( ims:ime, jms:jme ), INTENT(IN) , OPTIONAL :: qnwfa2d      ! Added by G. Thompson
+   REAL, DIMENSION( ims:ime, kms:kme, jms:jme ), INTENT(IN) , OPTIONAL :: nisg80, qisg80      ! GYoung
    REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                  &
          OPTIONAL,                                                &
          INTENT(INOUT ) ::                                        &
@@ -554,6 +556,23 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
    integer, parameter :: ntot = 50
    real :: wmin, wmax
    integer :: ierr
+
+
+!---------------------------------------------------------------------
+!  Initialise supplementary microphysics diagnostics
+!     nisg80, qisg80
+!---------------------------------------------------------------------
+
+   ! GYoung added new mphys variables for large ice calculations
+   DO J = jts, min(jde-1,jte)
+       DO K = kts, kte-1
+          DO I = its, min(ide-1,ite)
+             nisg80(i,k,j) = 0.
+             qisg80(i,k,j) = 0.                   
+          ENDDO
+       ENDDO
+   ENDDO
+
 
 !---------------------------------------------------------------------
 !  check for microphysics type.  We need a clean way to
@@ -746,6 +765,8 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
                      NWFA=qnwfa_curr,                    &
                      NIFA=qnifa_curr,                    &
                      NWFA2D=qnwfa2d,                     &
+                     NISG80=nisg80,                      &  ! GYoung
+                     QISG80=qisg80,                      &  ! GYoung           
                      TH=th,                              &
                      PII=pi_phy,                         &
                      P=p,                                &

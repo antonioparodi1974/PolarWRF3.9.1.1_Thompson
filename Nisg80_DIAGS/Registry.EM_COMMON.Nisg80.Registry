@@ -1297,7 +1297,7 @@ state    real    qv_old          ikj      misc        1         -      rusd     
 state    real    vmi3d          ikj     misc        1         -     hdu       "v_ice"                 "Mass-weighted ice fallspeed"  "m s-1"
 state    real    di3d           ikj     misc        1         -     hdu       "d_ice"                 "Mass-weighted mean ice size"  "m"
 state    real    rhopo3d        ikj     misc        1         -     hdu       "rho_ice"               "Mass-weighted mean ice density"  "kg m-3"
-state	 real  Nisg80       	ikj  	misc    	1     	-  	h    	"Nisg80"           	"Number of ice+snow+graupel greater than 80 micron"       	"L-1"
+state	 real  Nisg80       	ikj  	misc    	1     	-  	h    	"Nisg80"           	"Number of ice+snow+graupel greater than 80 micron"       	"# kg-1"
 state	 real  Qisg80       	ikj  	misc    	1     	-  	h    	"Qisg80"           	"Mass of ice+snow+graupel greater than 80 micron"       	"kg/kg"  
 
 # LIGHTNING NUDGING
@@ -2955,6 +2955,4 @@ halo      HALO_EM_C2 dyn_em    4:ph_2,al,p,mu_2,muts,mudf
 halo      HALO_EM_D dyn_em    24:ru_m,rv_m,ww_m,mut,muts
 halo      HALO_EM_D2_3 dyn_em 24:u_2,v_2,w_2,t_2,ph_2;24:moist,chem,tracer,scalar,tke_2;4:mu_2,al
 halo      HALO_EM_D2_5 dyn_em 48:u_2,v_2,w_2,t_2,ph_2;24:moist,chem,tracer,scalar,tke_2;4:mu_2,al
-halo      HALO_EM_D3_3 dyn_em 24:u_1,u_2,v_1,v_2,w_1,w_2,t_1,t_2,ph_1,ph_2,tke_1,tke_2,moist,chem,tracer,scalar;4:mu_1,mu_2
-halo      HALO_EM_D3_5 dyn_em 48:u_1,u_2,v_1,v_2,w_1,w_2,t_1,t_2,ph_1,ph_2,tke_1,tke_2,moist,chem,tracer,scalar;4:mu_1,mu_2
-halo      HALO_EM_E_3 dyn_em 24:u_1,u_2,v_1,v_2,w_1,w_2,t_1,t_2,ph_1,ph_
+halo      HALO_EM_D3_3 dyn_em
