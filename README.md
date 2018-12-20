@@ -1,2 +1,2 @@
-# WRF4.0.3_Thompson
-WRF V4.0.3 model runs using the Thompson-Eidhammer microphysics scheme for the Microphysics of Antarctic Clouds campaign.
+# WRF3.9.1.1_Thompson
+WRF V3.9.1.1 model runs using the Thompson-Eidhammer microphysics scheme for the Microphysics of Antarctic Clouds campaign.
