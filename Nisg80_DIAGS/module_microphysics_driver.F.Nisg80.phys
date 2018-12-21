@@ -563,15 +563,15 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
 !     nisg80, qisg80
 !---------------------------------------------------------------------
 
-   ! GYoung added new mphys variables for large ice calculations
-    DO J = jts, min(jde-1,jte)
-        DO K = kts, kte-1
-           DO I = its, min(ide-1,ite)
-              nisg80(i,k,j) = 0.
-              qisg80(i,k,j) = 0.                   
-           ENDDO
-        ENDDO
-    ENDDO
+   ! ! GYoung added new mphys variables for large ice calculations
+   !  DO J = jts, min(jde-1,jte)
+   !      DO K = kts, kte-1
+   !         DO I = its, min(ide-1,ite)
+   !            nisg80(i,k,j) = 0.
+   !            qisg80(i,k,j) = 0.                   
+   !         ENDDO
+   !      ENDDO
+   !  ENDDO
 
 
 !---------------------------------------------------------------------

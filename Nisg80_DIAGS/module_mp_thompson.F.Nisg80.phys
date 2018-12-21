@@ -1188,7 +1188,7 @@
 #if ( WRF_CHEM == 1 )
                       rainprod1d, evapprod1d, &
 #endif
-                      ! nisg80_1D, qisg80_1D, &
+                      nisg80_1D, qisg80_1D, &
                       kts, kte, dt, i, j)
 
          pcp_ra(i,j) = pptrain
@@ -1387,7 +1387,7 @@
 #if ( WRF_CHEM == 1 )
                           rainprod, evapprod, &
 #endif
-                        ! nisg80_1D, qisg80_1D, &
+                          nisg80_1D, qisg80_1D, &
                           kts, kte, dt, ii, jj)
 
       implicit none
@@ -1397,8 +1397,8 @@
       REAL, DIMENSION(kts:kte), INTENT(INOUT):: &
                           qv1d, qc1d, qi1d, qr1d, qs1d, qg1d, ni1d, &
                           nr1d, nc1d, nwfa1d, nifa1d, t1d
-      ! REAL, DIMENSION(kts:kte), INTENT(INOUT):: &
-      !                     nisg80_1D, qisg80_1D      ! G Young                        
+      REAL, DIMENSION(kts:kte), INTENT(INOUT):: &
+                          nisg80_1D, qisg80_1D      ! G Young                        
       REAL, DIMENSION(kts:kte), INTENT(IN):: p1d, w1d, dzq
       REAL, INTENT(INOUT):: pptrain, pptsnow, pptgraul, pptice
       REAL, INTENT(IN):: dt
@@ -3583,8 +3583,8 @@
          qg1d(k) = qg1d(k) + qgten(k)*DT
          if (qg1d(k) .le. R1) qg1d(k) = 0.0
 
-         ! nisg80_1D = 0.0
-         ! qisg80_1D = 0.0
+         nisg80_1D = 0.0
+         qisg80_1D = 0.0
 
       enddo
 
