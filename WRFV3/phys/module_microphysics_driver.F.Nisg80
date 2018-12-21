@@ -792,8 +792,8 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
                      has_reqc=has_reqc,                  & ! G. Thompson
                      has_reqi=has_reqi,                  & ! G. Thompson
                      has_reqs=has_reqs,                  & ! G. Thompson
-   !                  NISG80=nisg80,                      &  ! GYoung
-   !                  QISG80=qisg80,                      &  ! GYoung                       
+                     nisg80=nisg80,                      &  ! GYoung
+                     qisg80=qisg80,                      &  ! GYoung                       
                  IDS=ids,IDE=ide, JDS=jds,JDE=jde, KDS=kds,KDE=kde, &
                  IMS=ims,IME=ime, JMS=jms,JME=jme, KMS=kms,KME=kme, &
                  ITS=its,ITE=ite, JTS=jts,JTE=jte, KTS=kts,KTE=kte)
@@ -852,8 +852,8 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
                      has_reqc=has_reqc,                  & ! G. Thompson
                      has_reqi=has_reqi,                  & ! G. Thompson
                      has_reqs=has_reqs,                  & ! G. Thompson
-   !                  NISG80=nisg80,                      &  ! GYoung
-   !                  QISG80=qisg80,                      &  ! GYoung                       
+                     nisg80=nisg80,                      &  ! GYoung
+                     qisg80=qisg80,                      &  ! GYoung                       
                  IDS=ids,IDE=ide, JDS=jds,JDE=jde, KDS=kds,KDE=kde, &
                  IMS=ims,IME=ime, JMS=jms,JME=jme, KMS=kms,KME=kme, &
                  ITS=its,ITE=ite, JTS=jts,JTE=jte, KTS=kts,KTE=kte)
