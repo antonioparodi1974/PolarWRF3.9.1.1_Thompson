@@ -3811,8 +3811,7 @@ BENCH_START(micro_driver_tim)
       &        , RI_CURR=grid%rimi                                          &
       &        , re_cloud=grid%re_cloud, re_ice=grid%re_ice, re_snow=grid%re_snow & ! G. Thompson
       &        , has_reqc=grid%has_reqc, has_reqi=grid%has_reqi, has_reqs=grid%has_reqs & ! G. Thompson
-      &        , qnwfa2d=grid%qnwfa2d                                                   & ! G. Thompson  
-!      &        , nisg80=grid%nisg80, qisg80=grid%qisg80                     & ! GYoung     
+      &        , qnwfa2d=grid%qnwfa2d                                                   & ! G. Thompson
       &        , diagflag=diag_flag, do_radar_ref=config_flags%do_radar_ref &
       &        ,u=grid%u_phy,v=grid%v_phy &
       &        ,scalar=scalar,num_scalar=num_scalar                             &
@@ -4182,4 +4181,522 @@ BENCH_END(moist_phys_end_tim)
                   ,flag_rurv          = 0                                      &
                   ,flag_wph           = 0                                      &
                   ,flag_ww            = 0                                      &
-                  ,flag_t       
+                  ,flag_t             = 0                                      &
+                  ,flag_mu            = 0                                      &
+                  ,flag_mut           = 0                                      &
+                  ,flag_moist         = 0                                      &
+                  ,flag_chem          = 0                                      &
+                  ,flag_tracer        = 0                                      &
+                  ,flag_scalar        = im                                     &
+                  ,actual_distance_average=config_flags%actual_distance_average&
+                  ,pos_def            = config_flags%pos_def                   &
+                  ,swap_pole_with_next_j = config_flags%swap_pole_with_next_j  &
+                  ,moist=moist,chem=chem,tracer=tracer,scalar=scalar           &
+                  ,fft_filter_lat = config_flags%fft_filter_lat                &
+                  ,dclat = dclat                                               &
+                  ,ids=ids,ide=ide,jds=jds,jde=jde,kds=kds,kde=kde             &
+                  ,ims=ims,ime=ime,jms=jms,jme=jme,kms=kms,kme=kme             &
+                  ,ips=ips,ipe=ipe,jps=jps,jpe=jpe,kps=kps,kpe=kpe             &
+                  ,imsx=imsx,imex=imex,jmsx=jmsx,jmex=jmex,kmsx=kmsx,kmex=kmex &
+                  ,ipsx=ipsx,ipex=ipex,jpsx=jmsx,jpex=jpex,kpsx=kpsx,kpex=kpex )
+
+         IF ( config_flags%coupled_filtering ) THEN
+           CALL uncouple_scalars_for_filter ( FIELD=scalar(ims,kms,jms,im)     &
+                  ,MU=grid%mu_2 , MUB=grid%mub                                 &
+                  ,C1=grid%c1h , C2=grid%c2h                                   &
+                  ,ids=ids,ide=ide,jds=jds,jde=jde,kds=kds,kde=kde             &
+                  ,ims=ims,ime=ime,jms=jms,jme=jme,kms=kms,kme=kme             &
+                  ,ips=ips,ipe=ipe,jps=jps,jpe=jpe,kps=kps,kpe=kpe          )
+         END IF
+       ENDDO scalar_filter_loop
+     ENDIF
+   ENDIF
+
+!-----------------------------------------------------------
+!  end filter for chem and scalar variables at end of timestep
+!-----------------------------------------------------------
+
+   !  We're finished except for boundary condition (and patch) update
+
+   ! Boundary condition time (or communication time).  At this time, we have
+   ! implemented periodic and symmetric physical boundary conditions.
+
+   ! b.c. routine for data within patch.
+
+   ! we need to do both time levels of 
+   ! data because the time filter only works in the physical solution space.
+
+   ! First, do patch communications for boundary conditions (periodicity)
+
+!-----------------------------------------------------------
+!  Stencils for patch communications  (WCS, 29 June 2001)
+!
+!  here's where we need a wide comm stencil - these are the 
+!  uncoupled variables so are used for high order calc in
+!  advection and mixong routines.
+!
+!                              * * * * *
+!            *        * * *    * * * * *
+!          * + *      * + *    * * + * * 
+!            *        * * *    * * * * *
+!                              * * * * *
+!
+!   grid%u_1                            x
+!   grid%u_2                            x
+!   grid%v_1                            x
+!   grid%v_2                            x
+!   grid%w_1                            x
+!   grid%w_2                            x
+!   grid%t_1                            x
+!   grid%t_2                            x
+!  grid%ph_1                            x
+!  grid%ph_2                            x
+!  grid%tke_1                           x
+!  grid%tke_2                           x
+!
+!    2D variables
+!  grid%mu_1     x
+!  grid%mu_2     x
+!
+!    4D variables
+!  moist                         x
+!   chem                         x
+! scalar                         x
+!----------------------------------------------------------
+
+
+#ifdef DM_PARALLEL
+   IF      ( config_flags%h_mom_adv_order <= 4 ) THEN
+#    include "HALO_EM_D3_3.inc"
+   ELSE IF ( config_flags%h_mom_adv_order <= 6 ) THEN
+#    include "HALO_EM_D3_5.inc"
+   ELSE 
+      WRITE(wrf_err_message,*)'solve_em: invalid h_mom_adv_order = ',config_flags%h_mom_adv_order
+      CALL wrf_error_fatal(TRIM(wrf_err_message))
+   ENDIF
+#  include "PERIOD_BDY_EM_D3.inc"
+#  include "PERIOD_BDY_EM_MOIST.inc"
+#  include "PERIOD_BDY_EM_CHEM.inc"
+#  include "PERIOD_BDY_EM_TRACER.inc"
+#  include "PERIOD_BDY_EM_SCALAR.inc"
+#endif
+
+!  now set physical b.c on a patch
+
+BENCH_START(bc_2d_tim)
+   !$OMP PARALLEL DO   &
+   !$OMP PRIVATE ( ij )
+   tile_bc_loop_2: DO ij = 1 , grid%num_tiles
+
+     CALL wrf_debug ( 200 , ' call set_phys_bc_dry_2' )
+
+     CALL set_phys_bc_dry_2( config_flags,                           &
+                             grid%u_1, grid%u_2, grid%v_1, grid%v_2, grid%w_1, grid%w_2,           &
+                             grid%t_1, grid%t_2, grid%ph_1, grid%ph_2, grid%mu_1, grid%mu_2,       &
+                             ids, ide, jds, jde, kds, kde,           &
+                             ims, ime, jms, jme, kms, kme,           &
+                             ips, ipe, jps, jpe, kps, kpe,           &
+                             grid%i_start(ij), grid%i_end(ij),       &
+                             grid%j_start(ij), grid%j_end(ij),       &
+                             k_start    , k_end                     )
+
+     CALL set_physical_bc3d( grid%tke_1, 'p', config_flags,   &
+                             ids, ide, jds, jde, kds, kde,            &
+                             ims, ime, jms, jme, kms, kme,            &
+                             ips, ipe, jps, jpe, kps, kpe,            &
+                             grid%i_start(ij), grid%i_end(ij),        &
+                             grid%j_start(ij), grid%j_end(ij),        &
+                             k_start    , k_end-1                    )
+
+     CALL set_physical_bc3d( grid%tke_2 , 'p', config_flags,  &
+                             ids, ide, jds, jde, kds, kde,            &
+                             ims, ime, jms, jme, kms, kme,            &
+                             ips, ipe, jps, jpe, kps, kpe,            &
+                             grid%i_start(ij), grid%i_end(ij),        &
+                             grid%j_start(ij), grid%j_end(ij),        &
+                             k_start    , k_end                      )
+
+     moisture_loop_bdy_2 : DO im = PARAM_FIRST_SCALAR , num_3d_m
+
+       CALL set_physical_bc3d( moist(ims,kms,jms,im), 'p',           &
+                               config_flags,                           &
+                               ids, ide, jds, jde, kds, kde,           &
+                               ims, ime, jms, jme, kms, kme,           &
+                               ips, ipe, jps, jpe, kps, kpe,           &
+                               grid%i_start(ij), grid%i_end(ij),       &
+                               grid%j_start(ij), grid%j_end(ij),       &
+                               k_start    , k_end                     )
+
+     END DO moisture_loop_bdy_2
+
+     chem_species_bdy_loop_2 : DO ic = PARAM_FIRST_SCALAR , num_3d_c
+
+       CALL set_physical_bc3d( chem(ims,kms,jms,ic) , 'p', config_flags,  &
+                               ids, ide, jds, jde, kds, kde,            &
+                               ims, ime, jms, jme, kms, kme,            &
+                               ips, ipe, jps, jpe, kps, kpe,            &
+                               grid%i_start(ij), grid%i_end(ij),                  &
+                               grid%j_start(ij), grid%j_end(ij),                  &
+                               k_start    , k_end                      )
+
+     END DO chem_species_bdy_loop_2
+
+     tracer_species_bdy_loop_2 : DO ic = PARAM_FIRST_SCALAR , num_tracer
+
+       CALL set_physical_bc3d( tracer(ims,kms,jms,ic) , 'p', config_flags,  &
+                               ids, ide, jds, jde, kds, kde,            &
+                               ims, ime, jms, jme, kms, kme,            &
+                               ips, ipe, jps, jpe, kps, kpe,            &
+                               grid%i_start(ij), grid%i_end(ij),                  &
+                               grid%j_start(ij), grid%j_end(ij),                  &
+                               k_start    , k_end                      )
+
+     END DO tracer_species_bdy_loop_2
+
+     scalar_species_bdy_loop_2 : DO is = PARAM_FIRST_SCALAR , num_3d_s
+
+       CALL set_physical_bc3d( scalar(ims,kms,jms,is) , 'p', config_flags,  &
+                               ids, ide, jds, jde, kds, kde,            &
+                               ims, ime, jms, jme, kms, kme,            &
+                               ips, ipe, jps, jpe, kps, kpe,            &
+                               grid%i_start(ij), grid%i_end(ij),                  &
+                               grid%j_start(ij), grid%j_end(ij),                  &
+                               k_start    , k_end                      )
+
+     END DO scalar_species_bdy_loop_2
+
+   END DO tile_bc_loop_2
+   !$OMP END PARALLEL DO
+BENCH_END(bc_2d_tim)
+
+!  this code forces boundary values to specified values to avoid drift
+
+   IF( config_flags%specified .or. config_flags%nested ) THEN 
+   !$OMP PARALLEL DO   &
+   !$OMP PRIVATE ( ij )
+   tile_bc_loop_3: DO ij = 1 , grid%num_tiles
+
+     CALL wrf_debug ( 200 , ' call spec_bdy_final' )
+
+     CALL spec_bdy_final   ( grid%u_2, grid%muus, grid%c1h, grid%c2h, grid%msfuy,     &
+                                grid%u_bxs, grid%u_bxe, grid%u_bys, grid%u_bye,  &
+                                grid%u_btxs,grid%u_btxe,grid%u_btys,grid%u_btye, &
+                                'u', config_flags,                               &
+                                config_flags%spec_bdy_width, grid%spec_zone,     &
+                                grid%dtbc,                                       &
+                                ids,ide, jds,jde, kds,kde,  & ! domain dims
+                                ims,ime, jms,jme, kms,kme,  & ! memory dims
+                                ips,ipe, jps,jpe, kps,kpe,  & ! patch  dims
+                                grid%i_start(ij), grid%i_end(ij),       &
+                                grid%j_start(ij), grid%j_end(ij),       &
+                                k_start    , k_end                     )
+
+     CALL spec_bdy_final   ( grid%v_2, grid%muvs, grid%c1h, grid%c2h, grid%msfvx,     &
+                                grid%v_bxs, grid%v_bxe, grid%v_bys, grid%v_bye,  &
+                                grid%v_btxs,grid%v_btxe,grid%v_btys,grid%v_btye, &
+                                'v', config_flags,                               &
+                                config_flags%spec_bdy_width, grid%spec_zone,     &
+                                grid%dtbc,                                       &
+                                ids,ide, jds,jde, kds,kde,  & ! domain dims
+                                ims,ime, jms,jme, kms,kme,  & ! memory dims
+                                ips,ipe, jps,jpe, kps,kpe,  & ! patch  dims
+                                grid%i_start(ij), grid%i_end(ij),       &
+                                grid%j_start(ij), grid%j_end(ij),       &
+                                k_start    , k_end                     )
+
+     IF( config_flags%nested) THEN
+       CALL spec_bdy_final   ( grid%w_2, grid%muts, grid%c1f, grid%c2f, grid%msfty, &
+                                grid%w_bxs, grid%w_bxe, grid%w_bys, grid%w_bye,  &
+                                grid%w_btxs,grid%w_btxe,grid%w_btys,grid%w_btye, &
+                                'w', config_flags,                               &
+                                config_flags%spec_bdy_width, grid%spec_zone,     &
+                                grid%dtbc,                                       &
+                                ids,ide, jds,jde, kds,kde,  & ! domain dims
+                                ims,ime, jms,jme, kms,kme,  & ! memory dims
+                                ips,ipe, jps,jpe, kps,kpe,  & ! patch  dims
+                                grid%i_start(ij), grid%i_end(ij),       &
+                                grid%j_start(ij), grid%j_end(ij),       &
+                                k_start    , k_end                     )
+     ENDIF
+
+     CALL spec_bdy_final   ( grid%t_2, grid%muts, grid%c1h, grid%c2h, grid%msfty,&
+                                grid%t_bxs, grid%t_bxe, grid%t_bys, grid%t_bye,  &
+                                grid%t_btxs,grid%t_btxe,grid%t_btys,grid%t_btye, &
+                                't', config_flags,                               &
+                                config_flags%spec_bdy_width, grid%spec_zone,     &
+                                grid%dtbc,                                       &
+                                ids,ide, jds,jde, kds,kde,  & ! domain dims
+                                ims,ime, jms,jme, kms,kme,  & ! memory dims
+                                ips,ipe, jps,jpe, kps,kpe,  & ! patch  dims
+                                grid%i_start(ij), grid%i_end(ij),       &
+                                grid%j_start(ij), grid%j_end(ij),       &
+                                k_start    , k_end                     )
+
+     CALL spec_bdy_final   ( grid%ph_2, grid%muts, grid%c1f, grid%c2f, grid%msfty,   &
+                                grid%ph_bxs, grid%ph_bxe, grid%ph_bys, grid%ph_bye,  &
+                                grid%ph_btxs,grid%ph_btxe,grid%ph_btys,grid%ph_btye, &
+                                'h', config_flags,                               &
+                                config_flags%spec_bdy_width, grid%spec_zone,     &
+                                grid%dtbc,                                       &
+                                ids,ide, jds,jde, kds,kde,  & ! domain dims
+                                ims,ime, jms,jme, kms,kme,  & ! memory dims
+                                ips,ipe, jps,jpe, kps,kpe,  & ! patch  dims
+                                grid%i_start(ij), grid%i_end(ij),       &
+                                grid%j_start(ij), grid%j_end(ij),       &
+                                k_start    , k_end                     )
+
+     IF( config_flags%spec_bdy_final_mu .EQ. 1 ) THEN
+     CALL spec_bdy_final   ( grid%mu_2, grid%muts, grid%c1h, grid%c2h, grid%msfty,   &
+                                grid%mu_bxs, grid%mu_bxe, grid%mu_bys, grid%mu_bye,  &
+                                grid%mu_btxs,grid%mu_btxe,grid%mu_btys,grid%mu_btye, &
+                                'm', config_flags,                               &
+                                config_flags%spec_bdy_width, grid%spec_zone,     &
+                                grid%dtbc,                                       &
+                                ids,ide, jds,jde, 1,  1,    & ! domain dims
+                                ims,ime, jms,jme, 1,  1,    & ! memory dims
+                                ips,ipe, jps,jpe, 1,  1,    & ! patch  dims
+                                grid%i_start(ij), grid%i_end(ij),       &
+                                grid%j_start(ij), grid%j_end(ij),       &
+                                1  , 1                    )
+     ENDIF
+
+     moisture_loop_bdy_3 : DO im = PARAM_FIRST_SCALAR , num_3d_m
+
+     IF ( im .EQ. P_QV .OR. config_flags%nested .OR. &
+             ( config_flags%specified .AND. config_flags%have_bcs_moist ) ) THEN
+        CALL spec_bdy_final   ( moist(ims,kms,jms,im), grid%muts,                &
+                                grid%c1h, grid%c2h, grid%msfty,                  &
+                                moist_bxs(jms,kms,1,im),moist_bxe(jms,kms,1,im), &
+                                moist_bys(ims,kms,1,im),moist_bye(ims,kms,1,im), &
+                                moist_btxs(jms,kms,1,im),moist_btxe(jms,kms,1,im), &
+                                moist_btys(ims,kms,1,im),moist_btye(ims,kms,1,im), &
+                                't', config_flags,                               &
+                                config_flags%spec_bdy_width, grid%spec_zone,     &
+                                grid%dtbc,                                       &
+                                ids,ide, jds,jde, kds,kde,  & ! domain dims
+                                ims,ime, jms,jme, kms,kme,  & ! memory dims
+                                ips,ipe, jps,jpe, kps,kpe,  & ! patch  dims
+                                grid%i_start(ij), grid%i_end(ij),       &
+                                grid%j_start(ij), grid%j_end(ij),       &
+                                k_start    , k_end                     )
+     ENDIF
+
+     END DO moisture_loop_bdy_3
+
+#if (WRF_CHEM == 1)
+     IF (num_3d_c >= PARAM_FIRST_SCALAR)  THEN
+         chem_species_bdy_loop_3 : DO ic = PARAM_FIRST_SCALAR , num_3d_c
+
+     IF( ( config_flags%nested ) ) THEN
+        CALL spec_bdy_final   ( chem(ims,kms,jms,ic), grid%muts,               &
+                                grid%c1h, grid%c2h, grid%msfty,                &
+                                chem_bxs(jms,kms,1,ic),chem_bxe(jms,kms,1,ic), &
+                                chem_bys(ims,kms,1,ic),chem_bye(ims,kms,1,ic), &
+                                chem_btxs(jms,kms,1,ic),chem_btxe(jms,kms,1,ic), &
+                                chem_btys(ims,kms,1,ic),chem_btye(ims,kms,1,ic), &
+                                't', config_flags,                               &
+                                config_flags%spec_bdy_width, grid%spec_zone,     &
+                                grid%dtbc,                                       &
+                                ids,ide, jds,jde, kds,kde,  & ! domain dims
+                                ims,ime, jms,jme, kms,kme,  & ! memory dims
+                                ips,ipe, jps,jpe, kps,kpe,  & ! patch  dims
+                                grid%i_start(ij), grid%i_end(ij),       &
+                                grid%j_start(ij), grid%j_end(ij),       &
+                                k_start    , k_end                     )
+     ENDIF
+
+         END DO chem_species_bdy_loop_3
+     ENDIF
+#endif
+
+     tracer_species_bdy_loop_3 : DO im = PARAM_FIRST_SCALAR , num_tracer
+
+     IF( ( config_flags%nested ) ) THEN
+        CALL spec_bdy_final   ( tracer(ims,kms,jms,im), grid%muts,                 &
+                                grid%c1h, grid%c2h, grid%msfty,                    &
+                                tracer_bxs(jms,kms,1,im),tracer_bxe(jms,kms,1,im), &
+                                tracer_bys(ims,kms,1,im),tracer_bye(ims,kms,1,im), &
+                                tracer_btxs(jms,kms,1,im),tracer_btxe(jms,kms,1,im), &
+                                tracer_btys(ims,kms,1,im),tracer_btye(ims,kms,1,im), &
+                                't', config_flags,                               &
+                                config_flags%spec_bdy_width, grid%spec_zone,     &
+                                grid%dtbc,                                       &
+                                ids,ide, jds,jde, kds,kde,  & ! domain dims
+                                ims,ime, jms,jme, kms,kme,  & ! memory dims
+                                ips,ipe, jps,jpe, kps,kpe,  & ! patch  dims
+                                grid%i_start(ij), grid%i_end(ij),       &
+                                grid%j_start(ij), grid%j_end(ij),       &
+                                k_start    , k_end                     )
+     ENDIF
+
+     END DO tracer_species_bdy_loop_3
+
+     scalar_species_bdy_loop_3 : DO is = PARAM_FIRST_SCALAR , num_3d_s
+
+     IF( ( config_flags%nested ) ) THEN
+        CALL spec_bdy_final   ( scalar(ims,kms,jms,is), grid%muts,                 &
+                                grid%c1h, grid%c2h, grid%msfty,                    &
+                                scalar_bxs(jms,kms,1,is),scalar_bxe(jms,kms,1,is), &
+                                scalar_bys(ims,kms,1,is),scalar_bye(ims,kms,1,is), &
+                                scalar_btxs(jms,kms,1,is),scalar_btxe(jms,kms,1,is), &
+                                scalar_btys(ims,kms,1,is),scalar_btye(ims,kms,1,is), &
+                                't', config_flags,                               &
+                                config_flags%spec_bdy_width, grid%spec_zone,     &
+                                grid%dtbc,                                       &
+                                ids,ide, jds,jde, kds,kde,  & ! domain dims
+                                ims,ime, jms,jme, kms,kme,  & ! memory dims
+                                ips,ipe, jps,jpe, kps,kpe,  & ! patch  dims
+                                grid%i_start(ij), grid%i_end(ij),       &
+                                grid%j_start(ij), grid%j_end(ij),       &
+                                k_start    , k_end                     )
+     ENDIF
+
+     END DO scalar_species_bdy_loop_3
+
+   END DO tile_bc_loop_3
+   !$OMP END PARALLEL DO
+
+   ENDIF
+
+! reset surface w for consistency
+
+#ifdef DM_PARALLEL
+#  include "HALO_EM_C.inc"
+#  include "PERIOD_BDY_EM_E.inc"
+#endif
+
+   CALL wrf_debug ( 10 , ' call set_w_surface' )
+   fill_w_flag = .false.
+
+   !$OMP PARALLEL DO   &
+   !$OMP PRIVATE ( ij )
+   DO ij = 1 , grid%num_tiles
+      CALL set_w_surface( config_flags, grid%znw, fill_w_flag,              &
+                           grid%w_2, grid%ht,  grid%u_2, grid%v_2,          &
+                           grid%cf1, grid%cf2, grid%cf3, grid%rdx, grid%rdy,&
+                           grid%msftx, grid%msfty,                          &
+                           ids, ide, jds, jde, kds, kde,                    &
+                           ims, ime, jms, jme, kms, kme,                    &
+                           grid%i_start(ij), grid%i_end(ij),                &
+                           grid%j_start(ij), grid%j_end(ij),                &
+                           k_start, k_end                                   )
+!                          its, ite, jts, jte, k_start, min(k_end,kde-1),   &
+
+   END DO
+   !$OMP END PARALLEL DO
+
+!-----------------------------------------------------------
+!  After all of the RK steps, after the microphysics, after p-rho-phi,
+!  after w, after filtering, we have data ready to use.
+!-----------------------------------------------------------
+
+  CALL after_all_rk_steps ( grid, config_flags,                  &
+                            moist, chem, tracer, scalar,         &
+                            th_phy, pi_phy, p_phy, rho_phy,      &   
+                            p8w, t8w, dz8w,                      &
+                            curr_secs2,                          &
+                            diag_flag,                           &
+                            ids,  ide,  jds,  jde,  kds,  kde,   &
+                            ims,  ime,  jms,  jme,  kms,  kme,   &
+                            ips,  ipe,  jps,  jpe,  kps,  kpe,   &
+                            imsx, imex, jmsx, jmex, kmsx, kmex,  &
+                            ipsx, ipex, jpsx, jpex, kpsx, kpex,  &
+                            imsy, imey, jmsy, jmey, kmsy, kmey,  &
+                            ipsy, ipey, jpsy, jpey, kpsy, kpey   )
+
+
+
+#ifdef DM_PARALLEL
+!-----------------------------------------------------------------------
+! see above
+!--------------------------------------------------------------
+   CALL wrf_debug ( 200 , ' call HALO_RK_E' )
+   IF      ( config_flags%h_mom_adv_order <= 4 ) THEN
+#    include "HALO_EM_E_3.inc"
+   ELSE IF ( config_flags%h_mom_adv_order <= 6 ) THEN
+#    include "HALO_EM_E_5.inc"
+   ELSE
+     WRITE(wrf_err_message,*)'solve_em: invalid h_mom_adv_order = ',config_flags%h_mom_adv_order
+     CALL wrf_error_fatal(TRIM(wrf_err_message))
+   ENDIF
+#endif
+
+#ifdef DM_PARALLEL
+   IF ( num_moist >= PARAM_FIRST_SCALAR  ) THEN
+!-----------------------------------------------------------------------
+! see above
+!--------------------------------------------------------------
+     CALL wrf_debug ( 200 , ' call HALO_RK_MOIST' )
+     IF      ( config_flags%h_mom_adv_order <= 4 ) THEN
+#      include "HALO_EM_MOIST_E_3.inc"
+     ELSE IF ( config_flags%h_mom_adv_order <= 6 ) THEN
+#      include "HALO_EM_MOIST_E_5.inc"
+     ELSE
+       WRITE(wrf_err_message,*)'solve_em: invalid h_mom_adv_order = ',config_flags%h_mom_adv_order
+       CALL wrf_error_fatal(TRIM(wrf_err_message))
+     ENDIF
+   ENDIF
+   IF ( num_chem >= PARAM_FIRST_SCALAR ) THEN
+!-----------------------------------------------------------------------
+! see above
+!--------------------------------------------------------------
+     CALL wrf_debug ( 200 , ' call HALO_RK_CHEM' )
+     IF      ( config_flags%h_mom_adv_order <= 4 ) THEN
+#      include "HALO_EM_CHEM_E_3.inc"
+     ELSE IF ( config_flags%h_mom_adv_order <= 6 ) THEN
+#      include "HALO_EM_CHEM_E_5.inc"
+     ELSE
+       WRITE(wrf_err_message,*)'solve_em: invalid h_mom_adv_order = ',config_flags%h_mom_adv_order
+       CALL wrf_error_fatal(TRIM(wrf_err_message))
+     ENDIF
+   ENDIF
+   IF ( num_tracer >= PARAM_FIRST_SCALAR ) THEN
+!-----------------------------------------------------------------------
+! see above
+!--------------------------------------------------------------
+     CALL wrf_debug ( 200 , ' call HALO_RK_TRACER' )
+     IF      ( config_flags%h_mom_adv_order <= 4 ) THEN
+#      include "HALO_EM_TRACER_E_3.inc"
+     ELSE IF ( config_flags%h_mom_adv_order <= 6 ) THEN
+#      include "HALO_EM_TRACER_E_5.inc"
+     ELSE
+       WRITE(wrf_err_message,*)'solve_em: invalid h_mom_adv_order = ',config_flags%h_mom_adv_order
+       CALL wrf_error_fatal(TRIM(wrf_err_message))
+     ENDIF
+   ENDIF
+   IF ( num_scalar >= PARAM_FIRST_SCALAR ) THEN
+!-----------------------------------------------------------------------
+! see above
+!--------------------------------------------------------------
+     CALL wrf_debug ( 200 , ' call HALO_RK_SCALAR' )
+     IF      ( config_flags%h_mom_adv_order <= 4 ) THEN
+#      include "HALO_EM_SCALAR_E_3.inc"
+     ELSE IF ( config_flags%h_mom_adv_order <= 6 ) THEN
+#      include "HALO_EM_SCALAR_E_5.inc"
+     ELSE
+       WRITE(wrf_err_message,*)'solve_em: invalid h_mom_adv_order = ',config_flags%h_mom_adv_order
+       CALL wrf_error_fatal(TRIM(wrf_err_message))
+     ENDIF
+   ENDIF
+#endif
+
+!  Max values of CFL for adaptive time step scheme
+
+   DEALLOCATE(max_vert_cfl_tmp)
+   DEALLOCATE(max_horiz_cfl_tmp)
+
+   CALL wrf_debug ( 200 , ' call end of solve_em' )
+
+!  Are we about to read SST input from the wrflowinput file?  That data is saved
+!  for use in fractional merging of external/coupled SST and input SST. 
+   IF ( coupler_on )   grid%just_read_auxinput4 = Is_alarm_tstep(grid%domain_clock, grid%alarms(AUXINPUT4_ALARM))
+
+!  Are we about to read the lateral boundary file?  This is a domain one action only.
+   IF ( grid%id .EQ. 1 ) grid%just_read_boundary = Is_alarm_tstep(grid%domain_clock, grid%alarms(BOUNDARY_ALARM))
+
+! Finish timers if compiled with -DBENCH.
+#include "bench_solve_em_end.h"
+
+   RETURN
+
+END SUBROUTINE solve_em

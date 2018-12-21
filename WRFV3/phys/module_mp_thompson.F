@@ -1005,7 +1005,7 @@
 !..This is a wrapper routine designed to transfer values from 3D to 1D.
 !+---+-----------------------------------------------------------------+
       SUBROUTINE mp_gt_driver(qv, qc, qr, qi, qs, qg, ni, nr, nc,       &
-                              nwfa, nifa, nwfa2d,        &
+                              nwfa, nifa, nwfa2d,                       &
                               th, pii, p, w, dz, dt_in, itimestep,      &
                               RAINNC, RAINNCV, &
                               SNOWNC, SNOWNCV, &
@@ -1016,7 +1016,6 @@
                               refl_10cm, diagflag, do_radar_ref,      &
                               re_cloud, re_ice, re_snow,              &
                               has_reqc, has_reqi, has_reqs,           &
-!                              nisg80, qisg80,                         &
                               ids,ide, jds,jde, kds,kde, &             ! domain dims
                               ims,ime, jms,jme, kms,kme, &             ! memory dims
                               its,ite, jts,jte, kts,kte)               ! tile dims
@@ -1031,8 +1030,6 @@
                           qv, qc, qr, qi, qs, qg, ni, nr, th
       REAL, DIMENSION(ims:ime, kms:kme, jms:jme), OPTIONAL, INTENT(INOUT):: &
                           nc, nwfa, nifa
-      ! REAL, DIMENSION(ims:ime, kms:kme, jms:jme), OPTIONAL, INTENT(INOUT):: &
-      !                     nisg80, qisg80                                        ! GYoung                         
       REAL, DIMENSION(ims:ime, jms:jme), OPTIONAL, INTENT(IN):: nwfa2d
       REAL, DIMENSION(ims:ime, kms:kme, jms:jme), INTENT(INOUT):: &
                           re_cloud, re_ice, re_snow
@@ -1058,7 +1055,6 @@
                           nr1d, nc1d, nwfa1d, nifa1d,                   &
                           t1d, p1d, w1d, dz1d, rho, dBZ
       REAL, DIMENSION(kts:kte):: re_qc1d, re_qi1d, re_qs1d
-     ! REAL, DIMENSION(kts:kte):: nisg80_1D, qisg80_1D     !G Young     
 #if ( WRF_CHEM == 1 )
       REAL, DIMENSION(kts:kte):: &
                           rainprod1d, evapprod1d
@@ -1167,8 +1163,6 @@
                nc1d(k) = nc(i,k,j)
                nwfa1d(k) = nwfa(i,k,j)
                nifa1d(k) = nifa(i,k,j)
-               ! nisg80_1D(k) = nisg80(i,k,j) ! GYoung
-               ! qisg80_1D(k) = qisg80(i,k,j) ! GYoung
             enddo
             nwfa1 = nwfa2d(i,j)
          else
@@ -1182,13 +1176,11 @@
          endif
 
          call mp_thompson(qv1d, qc1d, qi1d, qr1d, qs1d, qg1d, ni1d,     &
-                      nr1d, nc1d, nwfa1d, nifa1d, & 
-                      t1d, p1d, w1d, dz1d, pptrain, pptsnow, pptgraul,  &
-                      pptice, &
+                      nr1d, nc1d, nwfa1d, nifa1d, t1d, p1d, w1d, dz1d,  &
+                      pptrain, pptsnow, pptgraul, pptice, &
 #if ( WRF_CHEM == 1 )
                       rainprod1d, evapprod1d, &
 #endif
-                      ! nisg80_1D, qisg80_1D, &
                       kts, kte, dt, i, j)
 
          pcp_ra(i,j) = pptrain
@@ -1220,8 +1212,6 @@
                nc(i,k,j) = nc1d(k)
                nwfa(i,k,j) = nwfa1d(k)
                nifa(i,k,j) = nifa1d(k)
-               ! nisg80(i,k,j) = nisg80_1D(k)   ! G Young
-               ! qisg80(i,k,j) = qisg80_1D(k)   ! G Young
             enddo
          endif
 
@@ -1381,13 +1371,11 @@
 !+---+-----------------------------------------------------------------+
 !
       subroutine mp_thompson (qv1d, qc1d, qi1d, qr1d, qs1d, qg1d, ni1d, &
-                          nr1d, nc1d, nwfa1d, nifa1d, &
-                          t1d, p1d, w1d, dzq, &
+                          nr1d, nc1d, nwfa1d, nifa1d, t1d, p1d, w1d, dzq, &
                           pptrain, pptsnow, pptgraul, pptice, &
 #if ( WRF_CHEM == 1 )
                           rainprod, evapprod, &
 #endif
-                        ! nisg80_1D, qisg80_1D, &
                           kts, kte, dt, ii, jj)
 
       implicit none
@@ -1397,8 +1385,6 @@
       REAL, DIMENSION(kts:kte), INTENT(INOUT):: &
                           qv1d, qc1d, qi1d, qr1d, qs1d, qg1d, ni1d, &
                           nr1d, nc1d, nwfa1d, nifa1d, t1d
-      ! REAL, DIMENSION(kts:kte), INTENT(INOUT):: &
-      !                     nisg80_1D, qisg80_1D      ! G Young                        
       REAL, DIMENSION(kts:kte), INTENT(IN):: p1d, w1d, dzq
       REAL, INTENT(INOUT):: pptrain, pptsnow, pptgraul, pptice
       REAL, INTENT(IN):: dt
@@ -3582,10 +3568,6 @@
          if (qs1d(k) .le. R1) qs1d(k) = 0.0
          qg1d(k) = qg1d(k) + qgten(k)*DT
          if (qg1d(k) .le. R1) qg1d(k) = 0.0
-
-         ! nisg80_1D = 0.0
-         ! qisg80_1D = 0.0
-
       enddo
 
       end subroutine mp_thompson
