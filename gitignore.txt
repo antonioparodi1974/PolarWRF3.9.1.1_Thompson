@@ -34,11 +34,11 @@ met_em*
 wrf_input*
 wrf_bdy*
 compile_log.txt
-WRFV3/external/*
-WRFV3/test/*
-WRFV3/inc/*
-WRFV3/tools/*
-WRFV3/frame/*
+WRFV3/external/
+WRFV3/test/
+WRFV3/inc/
+WRFV3/tools/
+WRFV3/frame/
 namelist.input.backup*
 
 #Ignore WPS/
