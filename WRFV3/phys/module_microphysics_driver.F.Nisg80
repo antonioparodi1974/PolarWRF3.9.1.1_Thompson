@@ -458,7 +458,7 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
    LOGICAL,  OPTIONAL,   INTENT(IN   )    :: channel_switch
    REAL, OPTIONAL,  INTENT(INOUT   ) :: naer  ! aerosol number concentration (/kg)
    REAL, DIMENSION( ims:ime, jms:jme ), INTENT(IN) , OPTIONAL :: qnwfa2d      ! Added by G. Thompson
-   REAL, DIMENSION( ims:ime, kms:kme, jms:jme ), INTENT(IN) :: nisg80, qisg80      ! GYoung
+   REAL, DIMENSION( ims:ime, kms:kme, jms:jme ), INTENT(INOUT) :: nisg80, qisg80      ! GYoung
    REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                  &
          OPTIONAL,                                                &
          INTENT(INOUT ) ::                                        &
@@ -563,15 +563,15 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
 !     nisg80, qisg80
 !---------------------------------------------------------------------
 
-   ! ! GYoung added new mphys variables for large ice calculations
-   !  DO J = jts, min(jde-1,jte)
-   !      DO K = kts, kte-1
-   !         DO I = its, min(ide-1,ite)
-   !            nisg80(i,k,j) = 0.
-   !            qisg80(i,k,j) = 0.                   
-   !         ENDDO
-   !      ENDDO
-   !  ENDDO
+   ! GYoung added new mphys variables for large ice calculations
+    DO J = jts, min(jde-1,jte)
+        DO K = kts, kte-1
+           DO I = its, min(ide-1,ite)
+              nisg80(i,k,j) = 0.
+              qisg80(i,k,j) = 0.                   
+           ENDDO
+        ENDDO
+    ENDDO
 
 
 !---------------------------------------------------------------------
