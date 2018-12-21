@@ -825,6 +825,8 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
                      QG=qg_curr,                         &
                      NI=qni_curr,                        &
                      NR=qnr_curr,                        &
+                     NISG80=nisg80,                      &  ! GYoung
+                     QISG80=qisg80,                      &  ! GYoung                       
                      TH=th,                              &
                      PII=pi_phy,                         &
                      P=p,                                &
