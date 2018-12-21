@@ -34,12 +34,27 @@ met_em*
 wrf_input*
 wrf_bdy*
 compile_log.txt
-WRFV3/external/
-WRFV3/test/
-WRFV3/inc/
-WRFV3/tools/
-WRFV3/frame/
+io_boilerplate_temporary.inc
+compile_wrf.log
+configure.wrf
+io_grib1.f90
+io_grib_share.f90
+io_int_idx_tags.h
+test_io_idx
+md_calls.inc
+module_dm.F
+module_state_description.F
+dm_comm_cpp_flags
+wrf_io_flags.h
+wrf_status_codes.h
+fseeko64_test
+namelist.input
+fseeko64_test
+fseeko_test
+gen_comms.c
+registry
 namelist.input.backup*
 
 #Ignore WPS/
 WPS/*
+
