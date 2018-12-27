@@ -3595,8 +3595,8 @@
 !+---+-----------------------------------------------------------------+
 !+---+-----------------------------------------------------------------+
 !.. Ice size distribution shape parameters (assumes gamma)
-         lami(k) = (am_i*cig(2)*oig1*ni1d(k)/qi1d(k))**obmi
-         N0_i(k) = ni1d(k)*lami(k)
+         lami = (am_i*cig(2)*oig1*ni1d(k)/qi1d(k))**obmi
+         N0_i(k) = ni1d(k)*lami
 
 
 !.. Graupel size distribution parameters (assumes gamma)
@@ -3615,8 +3615,8 @@
 ! If non-negligible ice, snow, or graupel mass is PRESENT
       if ( qi1d(K).gt.qsmll_dg .or. qs1d(k).gt.qsmll_dg .or. &
         qg1d(k).gt.qsmll_dg) then
-         Call calc_icesize(N0_i(k), lami(k), N0_g(k), &
-          lamg(k), 0., ci, Di, 80.e-6,      &
+         Call calc_icesize(N0_i(k), lami, N0_g(k), &
+          lamg, 0., ci, Di, 80.e-6,      &
           nisg80_1D, qisg80_1D)
       end if
 
