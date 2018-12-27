@@ -3611,8 +3611,8 @@
          N0_g(k) = N0_exp/(cgg(2)*lam_exp) * lamg**cge(2)
 
 !.. Snow size distribution shape parameters (assumes gamma)
-         lams = (am_s*csg(2)*(1./cse(1))*ns1d(k)/qs1d(k))**obms
-         N0_s(k) = ns1d(k)*lams
+         lams = (am_s*csg(2)*(1./cse(1))*smo0(k)/qs1d(k))**obms
+         N0_s(k) = smo0(k)*lams
 
 ! If non-negligible ice, snow, or graupel mass is PRESENT
       if ( qi1d(K).gt.qsmll_dg .or. qs1d(k).gt.qsmll_dg .or. &
