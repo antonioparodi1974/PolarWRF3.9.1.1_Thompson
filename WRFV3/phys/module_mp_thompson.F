@@ -3617,11 +3617,11 @@
         qg1d(k).gt.qsmll_dg) then
          Call calc_icesize(N0_i(k), lami, N0_g(k), &
           lamg, 0., am_i, bm_i, am_g, bm_g, 80.e-6,      &
-          nisg80_1D, qisg80_1D)
+          nisg80_1D(k), qisg80_1D(k))
       end if
 
-         nisg80_1D = 0.0
-         qisg80_1D = 0.0
+         ! nisg80_1D = 0.0
+         ! qisg80_1D = 0.0
 
       enddo
 
