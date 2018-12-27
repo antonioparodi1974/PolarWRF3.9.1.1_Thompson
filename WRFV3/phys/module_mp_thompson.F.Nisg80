@@ -60,6 +60,7 @@
       INTEGER, PARAMETER, PRIVATE:: IFDRY = 0
       REAL, PARAMETER, PRIVATE:: T_0 = 273.15
       REAL, PARAMETER, PRIVATE:: PI = 3.1415926536
+      REAL, PARAMETER, PRIVATE :: QSMLL_DG = 1e-8 ! Small value for diagnostics, GYoung
 
 !..Densities of rain, snow, graupel, and cloud ice.
       REAL, PARAMETER, PRIVATE:: rho_w = 1000.0
@@ -1450,7 +1451,7 @@
       REAL, DIMENSION(kts:kte):: diffu, visco, vsc2, &
            tcond, lvap, ocp, lvt2
 
-      DOUBLE PRECISION, DIMENSION(kts:kte):: ilamr, ilamg, N0_r, N0_g
+      DOUBLE PRECISION, DIMENSION(kts:kte):: ilamr, ilamg, N0_r, N0_g, N0_i, N0_s
       REAL, DIMENSION(kts:kte):: mvd_r, mvd_c
       REAL, DIMENSION(kts:kte):: smob, smo2, smo1, smo0, &
            smoc, smod, smoe, smof
@@ -3583,8 +3584,57 @@
          qg1d(k) = qg1d(k) + qgten(k)*DT
          if (qg1d(k) .le. R1) qg1d(k) = 0.0
 
-         nisg80_1D = 0.0
-         qisg80_1D = 0.0
+
+
+
+         !     LARGE ICE
+
+      ! do k = kte, kts, -1
+         lami = (am_i*cig(2)*oig1*ni1d(k)/qi1d(k))**obmi
+              ! ombi = 1/3 - same as morrison
+              ! ni1d/qi1d - same as morrison
+              ! cig(2) - same as morrison
+              ! am_i = same as morrison
+         N0_i(k) = ni1d(k)*lami(k)
+
+        ! lami = (am_i*cig(2)*oig1*Nt_i(k)/r_i(k))**obmi
+        ! N0_i = Nt_i(k)*oig1 * lami**cie(1)
+
+         ygra1 = 4.31 + alog10(max(5.E-5, rg(k)))
+         zans1 = 3.1 + (100./(300.*xslw1*ygra1/(10./xslw1+1.+0.25*ygra1)+30.+10.*ygra1))
+         N0_exp = 10.**(zans1)
+         N0_exp = MAX(DBLE(gonv_min), MIN(N0_exp, DBLE(gonv_max)))
+         N0_min = MIN(N0_exp, N0_min)
+         N0_exp = N0_min
+         lam_exp = (N0_exp*am_g*cgg(1)/rg(k))**oge1
+         lamg = lam_exp * (cgg(3)*ogg2*ogg1)**obmg
+         ilamg(k) = 1./lamg
+         N0_g(k) = N0_exp/(cgg(2)*lam_exp) * lamg**cge(2)
+      ! enddo
+
+
+! If non-negligible ice mass is PRESENT
+      if ( qi1d(K).gt.qsmll_dg .or. qs1d(k).gt.qsmll_dg .or. &
+        qg1d(k).gt.qsmll_dg) then
+         Call calc_icesize(N0_i(k), lami(k),
+          N0_g(k), lamg(k), 0., ci, Di, 80.e-6,      &
+     &        nisg80_1D, qisg80_1D)
+      end if
+! ! If non-negligible snow mass is PRESENT
+!       if ( QNI3D(K) > qsmll_dg ) then 
+!          Call calc_icesize(n0s(k), lams(k), 0., cs, ds, 80.e-6,      &
+!      &        Nsnow80, Qsnow80)
+!       end if
+
+! ! If non-negligible graupel mass is PRESENT
+!       if ( QG3D(K) > qsmll_dg ) then 
+!          Call calc_icesize(n0g(k), lamg(k), 0., cg, dg, 80.e-6,      &
+!      &        Ngraup80, Qgraup80)
+!       end if   
+
+
+         ! nisg80_1D = 0.0
+         ! qisg80_1D = 0.0
 
       enddo
 
@@ -5450,7 +5500,7 @@
 !+---+-----------------------------------------------------------------+
 
 !+---+-----------------------------------------------------------------+
-    ! GY 29/9/2017 - function for ice size calculations
+    ! GYoung - function for ice size calculations
       real function gammaupnew(a,x)
       
       implicit none    
@@ -5546,18 +5596,19 @@
 
 !+---+-----------------------------------------------------------------+
 
-      Subroutine calc_icesize(n0, lambda, alpha, c, d, dthresh, N, M)
+      Subroutine calc_icesize(n0i, lambi, n0g, lambg, alpha, c, d,  &
+        dthresh, N, M)
 
       ! Calculate number and mass of particles greater than threshold diameter
       
-    Real, intent(in) :: n0, lambda, alpha, c, d, dthresh
-    Real, intent(out) :: N, M 
-   
-    !REAL, EXTERNAL :: GammaUp
-    !REAL, EXTERNAL :: GammaUpNew ! NOT EXTERNAL IN THIS CASE, IN SAME MODULE
+    Real, intent(in) :: n0i, lambi, n0g, lambg, alpha, c, d, dthresh
+    Real, intent(out) :: N, M
+    Real, private :: Nice, Qice, Ngraup, Qgraup, Nsnow, Qsnow
 
-    N = max(1.,(n0*gammaupnew(alpha+1.,lambda*dthresh))/(lambda**(alpha+1.)))
-    M = max(0., (c*n0*gammaupnew(d+alpha+1.,lambda*dthresh))/(lambda**(d+alpha+1.)))
+    N = max(1.,(n0*gammaupnew(alpha+1.,lambda*dthresh))/  &
+      (lambda**(alpha+1.)))
+    M = max(0., (c*n0*gammaupnew(d+alpha+1.,lambda*dthresh))/  &
+      (lambda**(d+alpha+1.)))
 
       End Subroutine calc_icesize
 
