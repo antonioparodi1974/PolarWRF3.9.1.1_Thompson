@@ -5449,6 +5449,27 @@
 !
 !+---+-----------------------------------------------------------------+
 
+
+
+!+---+-----------------------------------------------------------------+
+
+      Subroutine calc_icesize(n0, lambda, alpha, c, d, dthresh, N, M)
+
+      ! Calculate number and mass of particles greater than threshold diameter
+      
+    Real, intent(in) :: n0, lambda, alpha, c, d, dthresh
+    Real, intent(out) :: N, M 
+   
+    !REAL, EXTERNAL :: GammaUp
+    !REAL, EXTERNAL :: GammaUpNew ! NOT EXTERNAL IN THIS CASE, IN SAME MODULE
+
+    N = max(1.,(n0*gammaupnew(alpha+1.,lambda*dthresh))/(lambda**(alpha+1.)))
+    M = max(0., (c*n0*gammaupnew(d+alpha+1.,lambda*dthresh))/(lambda**(d+alpha+1.)))
+
+      End Subroutine calc_icesize
+
+!+---+-----------------------------------------------------------------+  
+
 !+---+-----------------------------------------------------------------+
 END MODULE module_mp_thompson
 !+---+-----------------------------------------------------------------+
