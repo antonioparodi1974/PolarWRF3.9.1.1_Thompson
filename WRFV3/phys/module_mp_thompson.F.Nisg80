@@ -5589,7 +5589,7 @@
       ! Calculate number and mass of particles greater than threshold diameter
       
     Real, intent(in) :: alpha, ci, di, cg, dg, dthresh
-    DOUBLE PRECISION, intent(in) :: n0i, n0g, lambi, lambg,
+    DOUBLE PRECISION, intent(in) :: n0i, n0g, lambi, lambg
     Real, intent(out) :: N, M
     Real :: Nice, Qice, Ngraup, Qgraup, Nsnow, Qsnow
 
