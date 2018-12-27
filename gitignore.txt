@@ -57,8 +57,9 @@ p3_lookup_table_1.dat
 README.namelist
 diffwrf
 Registry
-io_grib1.f90
-io_grib_share.f90
+WRFV3/external/io_grib1/io_grib1.f90
+WRFV3/external/io_grib_share/io_grib_share.f90
+
 #Ignore WPS/
 WPS/*
 
