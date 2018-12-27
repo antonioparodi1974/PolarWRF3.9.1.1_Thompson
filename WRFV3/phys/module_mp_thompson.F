@@ -5449,7 +5449,100 @@
 !
 !+---+-----------------------------------------------------------------+
 
+!+---+-----------------------------------------------------------------+
+    ! GY 29/9/2017 - function for ice size calculations
+      real function gammaupnew(a,x)
+      
+      implicit none    
+  
+      real :: a, x
+      real :: eigamma, gammafuncnew
+!----------------------------------------------
+!-------  GAMMAFUNCNEW, argument = a
+!----------------------------------------------
+!      real :: x1 ! DUMMY VARIABLE
+      real :: f1,g1,z1
+      REAL, PARAMETER :: pi=3.14159
 
+!----------------------------------------------
+!-------  EIGAMMA, arguments = a, x
+!----------------------------------------------
+      
+      real :: p,g,b,z,f
+      integer :: j
+      
+!----------------------------------------------
+!-------  GAMMAFUNCNEW, argument = a
+!----------------------------------------------
+
+      f1=huge(a)
+      g1=1
+      z1=a
+      if ((z1+int(abs(z1))).ne.0)then
+       do while(z1<3)
+          ! Lets use a recursion relation for Gamma functions
+          ! to get a large argument and use Stirlings formula
+          g1=g1*z1
+          z1=z1+1
+       end do
+
+       ! This is just stirlings formula...
+       f1=(1.-2.*(1-2./(3.*z1*z1))/(7.*z1*z1))/(30.*z1*z1)
+       f1=(1.-f1)/(12.*z1)+z1*(log(z1)-1)
+       f1=(exp(f1)/g1)*sqrt(2.*pi/z1)
+
+      endif
+      gammafuncnew=f1
+
+!----------------------------------------------
+!-------  EIGAMMA, arguments = a, x
+!----------------------------------------------
+
+      if (x < 100.0) then     
+ 
+      g=1
+      p=1
+      b=a
+      do while(b<=1.)
+         b=b+1
+         g=g*x
+         p=p*b+g
+      end do
+      b=b+1
+
+      j=int(5.*(3.+abs(x))/2.)
+      f=1./(j+b-x)
+
+      do while(j/=0)
+         j=j-1
+         f=(f*x+1.)/(j+b)
+      end do
+
+      p=p+f*g*x
+      g=(1.-(2./(7.*b*b))*(1.-2./(3.*b*b)))/(30.*b*b)
+      g=(g-1.)/(12.*b)-b*(log(b)-1.)
+
+      f=p*exp(g-x)*sqrt(b/(2.*pi))
+
+      eigamma=f
+   
+      else
+     
+      eigamma=0.0
+
+      endif
+
+!----------------------------------------------
+!-------  GAMMAUP
+!----------------------------------------------
+   
+! integral(x to infty) t^a-1 exp(-t) dt
+   
+      gammaupnew=(gammafuncnew*(1-x**a*eigamma))
+   
+      end function gammaupnew
+
+!+---+-----------------------------------------------------------------+
 
 !+---+-----------------------------------------------------------------+
 
