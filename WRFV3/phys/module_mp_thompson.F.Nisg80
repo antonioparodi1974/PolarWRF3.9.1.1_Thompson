@@ -3595,7 +3595,7 @@
 !+---+-----------------------------------------------------------------+
 !+---+-----------------------------------------------------------------+
 !.. Ice size distribution shape parameters (assumes gamma)
-         lami = (am_i*cig(2)*oig1*ni1d(k)/qi1d(k))**obmi
+         lami(k) = (am_i*cig(2)*oig1*ni1d(k)/qi1d(k))**obmi
          N0_i(k) = ni1d(k)*lami(k)
 
 
