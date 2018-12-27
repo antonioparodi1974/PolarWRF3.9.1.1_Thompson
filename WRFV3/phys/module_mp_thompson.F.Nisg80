@@ -3616,7 +3616,7 @@
       if ( qi1d(K).gt.qsmll_dg .or. qs1d(k).gt.qsmll_dg .or. &
         qg1d(k).gt.qsmll_dg) then
          Call calc_icesize(N0_i(k), lami, N0_g(k), &
-          lamg, 0., ci, Di, 80.e-6,      &
+          lamg, 0., am_i, bm_i, am_g, bm_g, 80.e-6,      &
           nisg80_1D, qisg80_1D)
       end if
 
@@ -5583,12 +5583,13 @@
 
 !+---+-----------------------------------------------------------------+
 
-      Subroutine calc_icesize(n0i, lambi, n0g, lambg, alpha, c, d,  &
-        dthresh, N, M)
+      Subroutine calc_icesize(n0i, lambi, n0g, lambg, alpha, ci, di,  &
+        cg, dg, dthresh, N, M)
 
       ! Calculate number and mass of particles greater than threshold diameter
       
-    Real, intent(in) :: n0i, lambi, n0g, lambg, alpha, c, d, dthresh
+    Real, intent(in) :: n0i, lambi, n0g, lambg, alpha, ci, di, &
+            cg, dg, dthresh
     Real, intent(out) :: N, M
     Real :: Nice, Qice, Ngraup, Qgraup, Nsnow, Qsnow
 
