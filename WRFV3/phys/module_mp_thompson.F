@@ -1461,7 +1461,7 @@
 
       REAL:: rgvm, delta_tp, orho, lfus2
       REAL, DIMENSION(5):: onstep
-      DOUBLE PRECISION:: N0_exp, N0_min, lam_exp, lamc, lamr, lamg
+      DOUBLE PRECISION:: N0_exp, N0_min, lam_exp, lamc, lamr, lamg, lams
       DOUBLE PRECISION:: lami, ilami, ilamc
       REAL:: xDc, Dc_b, Dc_g, xDi, xDr, xDs, xDg, Ds_m, Dg_m
       DOUBLE PRECISION:: Dr_star, Dc_star
@@ -3598,7 +3598,6 @@
          lami = (am_i*cig(2)*oig1*ni1d(k)/qi1d(k))**obmi
          N0_i(k) = ni1d(k)*lami
 
-
 !.. Graupel size distribution parameters (assumes gamma)
          ygra1 = 4.31 + alog10(max(5.E-5, rg(k)))
          zans1 = 3.1 + (100./(300.*xslw1*ygra1/(10./xslw1+1.+0.25*ygra1)+30.+10.*ygra1))
@@ -3611,12 +3610,16 @@
          ilamg(k) = 1./lamg
          N0_g(k) = N0_exp/(cgg(2)*lam_exp) * lamg**cge(2)
 
+!.. Snow size distribution shape parameters (assumes gamma)
+         lams = (am_s*csg(2)*(1./cse(1))*ns1d(k)/qs1d(k))**obms
+         N0_s(k) = ns1d(k)*lams
 
 ! If non-negligible ice, snow, or graupel mass is PRESENT
       if ( qi1d(K).gt.qsmll_dg .or. qs1d(k).gt.qsmll_dg .or. &
         qg1d(k).gt.qsmll_dg) then
          Call calc_icesize(N0_i(k), lami, N0_g(k), &
-          lamg, 0., am_i, bm_i, am_g, bm_g, 80.e-6,      &
+          lamg, N0_s(k), lams, 0., am_i, bm_i, am_g, bm_g, &
+          am_s, bm_s, 80.e-6,      &
           nisg80_1D(k), qisg80_1D(k))
       end if
 
@@ -5583,13 +5586,13 @@
 
 !+---+-----------------------------------------------------------------+
 
-      Subroutine calc_icesize(n0i, lambi, n0g, lambg, alpha, ci, di,  &
-        cg, dg, dthresh, N, M)
+      Subroutine calc_icesize(n0i, lambi, n0g, lambg, n0s, lambs, alpha, ci, di,  &
+        cg, dg, cs, ds, dthresh, N, M)
 
       ! Calculate number and mass of particles greater than threshold diameter
       
-    Real, intent(in) :: alpha, ci, di, cg, dg, dthresh
-    DOUBLE PRECISION, intent(in) :: n0i, n0g, lambi, lambg
+    Real, intent(in) :: alpha, ci, di, cg, dg, cs, ds, dthresh
+    DOUBLE PRECISION, intent(in) :: n0i, n0g, n0s, lambi, lambg, lambs
     Real, intent(out) :: N, M
     Real :: Nice, Qice, Ngraup, Qgraup, Nsnow, Qsnow
 
