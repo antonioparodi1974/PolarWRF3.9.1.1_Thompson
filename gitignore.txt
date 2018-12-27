@@ -55,6 +55,8 @@ registry
 namelist.input.backup*
 p3_lookup_table_1.dat
 README.namelist
+diffwrf
+Registry
 
 #Ignore WPS/
 WPS/*
