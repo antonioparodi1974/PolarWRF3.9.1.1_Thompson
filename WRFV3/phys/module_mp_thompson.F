@@ -3591,7 +3591,9 @@
 !+---+-----------------------------------------------------------------+
 !.. Calculation of large ice, snow, and graupel for comparison with
 !.. optical array shadow probes. Hard coded at sizes >80um for comparison
-!.. with 2DS measurements in this instance -- GYoung
+!.. with 2DS measurements in this instance. Only need to calculate via
+!.. calc_icesize for graupel and ice, snow hardcoded to be >200um.
+!..            -- GYoung
 !+---+-----------------------------------------------------------------+
 !+---+-----------------------------------------------------------------+
 !.. Ice size distribution shape parameters (assumes gamma)
@@ -3607,19 +3609,14 @@
          N0_exp = N0_min
          lam_exp = (N0_exp*am_g*cgg(1)/rg(k))**oge1
          lamg = lam_exp * (cgg(3)*ogg2*ogg1)**obmg
-         ilamg(k) = 1./lamg
          N0_g(k) = N0_exp/(cgg(2)*lam_exp) * lamg**cge(2)
-
-!.. Snow size distribution shape parameters (assumes gamma)
-         lams = (am_s*csg(2)*(1./cse(1))*smo0(k)/qs1d(k))**obms
-         N0_s(k) = smo0(k)*lams
 
 ! If non-negligible ice, snow, or graupel mass is PRESENT
       if ( qi1d(K).gt.qsmll_dg .or. qs1d(k).gt.qsmll_dg .or. &
         qg1d(k).gt.qsmll_dg) then
          Call calc_icesize(N0_i(k), lami, N0_g(k), &
-          lamg, N0_s(k), lams, 0., am_i, bm_i, am_g, bm_g, &
-          am_s, bm_s, 80.e-6,      &
+          lamg, smo0(k), qs1d(k), 0., am_i, bm_i, am_g, bm_g, &
+          am_s, bm_s, 80.e-6,      &  ! Particles >80um
           nisg80_1D(k), qisg80_1D(k))
       end if
 
@@ -5587,14 +5584,14 @@
 !+---+-----------------------------------------------------------------+
 
       Subroutine calc_icesize(n0i, lambi, n0g, lambg, n0s, lambs, alpha, ci, di,  &
-        cg, dg, cs, ds, dthresh, N, M)
+        cg, dg, Nsnow, Qsnow, dthresh, N, M)
 
       ! Calculate number and mass of particles greater than threshold diameter
       
-    Real, intent(in) :: alpha, ci, di, cg, dg, cs, ds, dthresh
+    Real, intent(in) :: alpha, ci, di, cg, dg, cs, ds, dthresh, Nsnow, Qsnow
     DOUBLE PRECISION, intent(in) :: n0i, n0g, n0s, lambi, lambg, lambs
     Real, intent(out) :: N, M
-    Real :: Nice, Qice, Ngraup, Qgraup, Nsnow, Qsnow
+    Real :: Nice, Qice, Ngraup, Qgraup
 
     ! N = max(1.,(n0*gammaupnew(alpha+1.,lambda*dthresh))/  &
     !   (lambda**(alpha+1.)))
