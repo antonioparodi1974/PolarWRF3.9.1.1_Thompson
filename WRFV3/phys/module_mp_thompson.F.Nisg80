@@ -5591,7 +5591,7 @@
     Real, intent(in) :: alpha, ci, di, cg, dg, dthresh, Nsnow, Qsnow
     DOUBLE PRECISION, intent(in) :: n0i, n0g, lambi, lambg 
     Real, intent(out) :: N, Q
-    DOUBLE PRECISION, :: Nice, Qice, Ngraup, Qgraup
+    Real :: Nice, Qice, Ngraup, Qgraup
 
     Nice = max(1.,(n0i*gammaupnew(alpha+1.,lambi*dthresh))/  &
       (lambi**(alpha+1.)))
