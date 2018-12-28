@@ -3616,7 +3616,7 @@
         qg1d(k).gt.qsmll_dg) then
          Call calc_icesize(N0_i(k), lami, N0_g(k), &
           lamg, smo0(k), qs1d(k), 0., am_i, bm_i, am_g, bm_g, &
-          am_s, bm_s, 80.e-6,      &  ! Particles >80um
+          80.e-6,      &  ! Particles >80um
           nisg80_1D(k), qisg80_1D(k))
       end if
 
@@ -3673,7 +3673,7 @@
             INQUIRE(63,opened=lopen)
             IF (lopen) THEN
               IF( force_read_thompson ) THEN
-                CALL wrf_error_fatal("Error reading qr_acr_qg.dat. Aborting because force_read_thompson is .true.")
+                CALL wrf_error_fatal("Error reading qrf_acr_qg.dat. Aborting because force_read_thompson is .true.")
               ENDIF
               CLOSE(63)
             ELSE
@@ -5583,13 +5583,13 @@
 
 !+---+-----------------------------------------------------------------+
 
-      Subroutine calc_icesize(n0i, lambi, n0g, lambg, n0s, lambs, alpha, ci, di,  &
-        cg, dg, Nsnow, Qsnow, dthresh, N, M)
+      Subroutine calc_icesize(n0i, lambi, n0g, lambg, Nsnow, Qsnow, &
+        alpha, ci, di, cg, dg, dthresh, N, M)
 
       ! Calculate number and mass of particles greater than threshold diameter
       
-    Real, intent(in) :: alpha, ci, di, cg, dg, cs, ds, dthresh, Nsnow, Qsnow
-    DOUBLE PRECISION, intent(in) :: n0i, n0g, n0s, lambi, lambg, lambs
+    Real, intent(in) :: alpha, ci, di, cg, dg, dthresh, Nsnow, Qsnow
+    DOUBLE PRECISION, intent(in) :: n0i, n0g, lambi, lambg 
     Real, intent(out) :: N, M
     Real :: Nice, Qice, Ngraup, Qgraup
 
