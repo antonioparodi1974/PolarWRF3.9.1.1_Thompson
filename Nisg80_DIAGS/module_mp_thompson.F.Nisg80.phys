@@ -60,6 +60,7 @@
       INTEGER, PARAMETER, PRIVATE:: IFDRY = 0
       REAL, PARAMETER, PRIVATE:: T_0 = 273.15
       REAL, PARAMETER, PRIVATE:: PI = 3.1415926536
+      REAL, PARAMETER, PRIVATE :: QSMLL_DG = 1e-8 ! Small value for diagnostics, GYoung
 
 !..Densities of rain, snow, graupel, and cloud ice.
       REAL, PARAMETER, PRIVATE:: rho_w = 1000.0
@@ -1450,7 +1451,8 @@
       REAL, DIMENSION(kts:kte):: diffu, visco, vsc2, &
            tcond, lvap, ocp, lvt2
 
-      DOUBLE PRECISION, DIMENSION(kts:kte):: ilamr, ilamg, N0_r, N0_g
+      DOUBLE PRECISION, DIMENSION(kts:kte):: ilamr, ilamg, N0_r, N0_g, &
+           N0_i, N0_s
       REAL, DIMENSION(kts:kte):: mvd_r, mvd_c
       REAL, DIMENSION(kts:kte):: smob, smo2, smo1, smo0, &
            smoc, smod, smoe, smof
@@ -1459,7 +1461,7 @@
 
       REAL:: rgvm, delta_tp, orho, lfus2
       REAL, DIMENSION(5):: onstep
-      DOUBLE PRECISION:: N0_exp, N0_min, lam_exp, lamc, lamr, lamg
+      DOUBLE PRECISION:: N0_exp, N0_min, lam_exp, lamc, lamr, lamg, lams
       DOUBLE PRECISION:: lami, ilami, ilamc
       REAL:: xDc, Dc_b, Dc_g, xDi, xDr, xDs, xDg, Ds_m, Dg_m
       DOUBLE PRECISION:: Dr_star, Dc_star
@@ -3583,8 +3585,43 @@
          qg1d(k) = qg1d(k) + qgten(k)*DT
          if (qg1d(k) .le. R1) qg1d(k) = 0.0
 
-         nisg80_1D = 0.0
-         qisg80_1D = 0.0
+
+
+!+---+-----------------------------------------------------------------+
+!+---+-----------------------------------------------------------------+
+!.. Calculation of large ice, snow, and graupel for comparison with
+!.. optical array shadow probes. Hard coded at sizes >80um for comparison
+!.. with 2DS measurements in this instance. Only need to calculate via
+!.. calc_icesize for graupel and ice, snow hardcoded to be >200um.
+!..            -- GYoung
+!+---+-----------------------------------------------------------------+
+!+---+-----------------------------------------------------------------+
+!.. Ice size distribution shape parameters (assumes gamma)
+         lami = (am_i*cig(2)*oig1*ni1d(k)/qi1d(k))**obmi
+         N0_i(k) = ni1d(k)*lami
+
+!.. Graupel size distribution parameters (assumes gamma)
+         ygra1 = 4.31 + alog10(max(5.E-5, rg(k)))
+         zans1 = 3.1 + (100./(300.*xslw1*ygra1/(10./xslw1+1.+0.25*ygra1)+30.+10.*ygra1))
+         N0_exp = 10.**(zans1)
+         N0_exp = MAX(DBLE(gonv_min), MIN(N0_exp, DBLE(gonv_max)))
+         N0_min = MIN(N0_exp, N0_min)
+         N0_exp = N0_min
+         lam_exp = (N0_exp*am_g*cgg(1)/rg(k))**oge1
+         lamg = lam_exp * (cgg(3)*ogg2*ogg1)**obmg
+         N0_g(k) = N0_exp/(cgg(2)*lam_exp) * lamg**cge(2)
+
+! If non-negligible ice, snow, or graupel mass is PRESENT
+      if ( qi1d(K).gt.qsmll_dg .or. qs1d(k).gt.qsmll_dg .or. &
+        qg1d(k).gt.qsmll_dg) then
+         Call calc_icesize(N0_i(k), lami, N0_g(k), &
+          lamg, smo0(k), qs1d(k), 0., am_i, bm_i, am_g, bm_g, &
+          80.e-6,      &  ! Particles >80um
+          nisg80_1D(k), qisg80_1D(k))
+      end if
+
+         ! nisg80_1D = 0.0
+         ! qisg80_1D = 0.0
 
       enddo
 
@@ -3636,7 +3673,7 @@
             INQUIRE(63,opened=lopen)
             IF (lopen) THEN
               IF( force_read_thompson ) THEN
-                CALL wrf_error_fatal("Error reading qr_acr_qg.dat. Aborting because force_read_thompson is .true.")
+                CALL wrf_error_fatal("Error reading qrf_acr_qg.dat. Aborting because force_read_thompson is .true.")
               ENDIF
               CLOSE(63)
             ELSE
@@ -5450,7 +5487,7 @@
 !+---+-----------------------------------------------------------------+
 
 !+---+-----------------------------------------------------------------+
-    ! GY 29/9/2017 - function for ice size calculations
+    ! GYoung - function for ice size calculations
       real function gammaupnew(a,x)
       
       implicit none    
@@ -5546,18 +5583,28 @@
 
 !+---+-----------------------------------------------------------------+
 
-      Subroutine calc_icesize(n0, lambda, alpha, c, d, dthresh, N, M)
+      Subroutine calc_icesize(n0i, lambi, n0g, lambg, Nsnow, Qsnow, &
+        alpha, ci, di, cg, dg, dthresh, N, Q)
 
       ! Calculate number and mass of particles greater than threshold diameter
       
-    Real, intent(in) :: n0, lambda, alpha, c, d, dthresh
-    Real, intent(out) :: N, M 
-   
-    !REAL, EXTERNAL :: GammaUp
-    !REAL, EXTERNAL :: GammaUpNew ! NOT EXTERNAL IN THIS CASE, IN SAME MODULE
+    Real, intent(in) :: alpha, ci, di, cg, dg, dthresh, Nsnow, Qsnow
+    DOUBLE PRECISION, intent(in) :: n0i, n0g, lambi, lambg 
+    Real, intent(out) :: N, Q
+    Real :: Nice, Qice, Ngraup, Qgraup
 
-    N = max(1.,(n0*gammaupnew(alpha+1.,lambda*dthresh))/(lambda**(alpha+1.)))
-    M = max(0., (c*n0*gammaupnew(d+alpha+1.,lambda*dthresh))/(lambda**(d+alpha+1.)))
+    Nice = max(1.,(n0i*gammaupnew(alpha+1.,lambi*dthresh))/  &
+      (lambi**(alpha+1.)))
+    Qice = max(0., (ci*n0i*gammaupnew(di+alpha+1.,lambi*dthresh))/  &
+      (lambi**(di+alpha+1.)))
+
+    Ngraup = max(1.,(n0g*gammaupnew(alpha+1.,lambg*dthresh))/  &
+      (lambg**(alpha+1.)))
+    Qgraup = max(0., (cg*n0g*gammaupnew(dg+alpha+1.,lambg*dthresh))/  &
+      (lambg**(dg+alpha+1.)))
+
+    N = Nice + Ngraup + Nsnow
+    Q = Qice + Qgraup + Qsnow
 
       End Subroutine calc_icesize
 

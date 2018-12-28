@@ -5584,19 +5584,27 @@
 !+---+-----------------------------------------------------------------+
 
       Subroutine calc_icesize(n0i, lambi, n0g, lambg, Nsnow, Qsnow, &
-        alpha, ci, di, cg, dg, dthresh, N, M)
+        alpha, ci, di, cg, dg, dthresh, N, Q)
 
       ! Calculate number and mass of particles greater than threshold diameter
       
     Real, intent(in) :: alpha, ci, di, cg, dg, dthresh, Nsnow, Qsnow
     DOUBLE PRECISION, intent(in) :: n0i, n0g, lambi, lambg 
-    Real, intent(out) :: N, M
+    Real, intent(out) :: N, Q
     Real :: Nice, Qice, Ngraup, Qgraup
 
-    ! N = max(1.,(n0*gammaupnew(alpha+1.,lambda*dthresh))/  &
-    !   (lambda**(alpha+1.)))
-    ! M = max(0., (c*n0*gammaupnew(d+alpha+1.,lambda*dthresh))/  &
-    !   (lambda**(d+alpha+1.)))
+    Nice = max(1.,(n0i*gammaupnew(alpha+1.,lambi*dthresh))/  &
+      (lambi**(alpha+1.)))
+    Qice = max(0., (ci*n0i*gammaupnew(di+alpha+1.,lambi*dthresh))/  &
+      (lambi**(di+alpha+1.)))
+
+    Ngraup = max(1.,(n0g*gammaupnew(alpha+1.,lambg*dthresh))/  &
+      (lambg**(alpha+1.)))
+    Qgraup = max(0., (cg*n0g*gammaupnew(dg+alpha+1.,lambg*dthresh))/  &
+      (lambg**(dg+alpha+1.)))
+
+    N = Nice + Ngraup + Nsnow
+    Q = Qice + Qgraup + Qsnow
 
       End Subroutine calc_icesize
 
