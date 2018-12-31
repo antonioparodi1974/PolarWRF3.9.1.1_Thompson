@@ -5592,7 +5592,7 @@
 
     Real, intent(in) :: alpha, ci, di, cg, dg, dthresh, Nsnow, Qsnow
     !Real, intent(in) :: lambi, lambg
-    DOUBLE PRECISION, intent(in) :: n0i, n0g, lambi, lambg 
+    Real, intent(in) :: n0i, n0g, lambi, lambg 
     Real, intent(out) :: N, Q
     Real :: Nice, Qice, Ngraup, Qgraup
 
