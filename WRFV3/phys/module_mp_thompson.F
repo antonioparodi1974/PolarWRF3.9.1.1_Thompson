@@ -5488,15 +5488,15 @@
 
 !+---+-----------------------------------------------------------------+
     ! GYoung - function for ice size calculations
-      real function gammaupnew(a,x)
+      real function GAMMAICE(a,x)
       
       implicit none    
   
       real :: a
       double precision :: x
-      real :: eigamma, gammafuncnew
+      real :: eigamma, GAMMAICEFUNC
 !----------------------------------------------
-!-------  GAMMAFUNCNEW, argument = a
+!-------  GAMMAICEFUNC, argument = a
 !----------------------------------------------
 !      real :: x1 ! DUMMY VARIABLE
       real :: f1,g1,z1
@@ -5510,7 +5510,7 @@
       integer :: j
       
 !----------------------------------------------
-!-------  GAMMAFUNCNEW, argument = a
+!-------  GAMMAICEFUNC, argument = a
 !----------------------------------------------
 
       f1=huge(a)
@@ -5530,7 +5530,7 @@
        f1=(exp(f1)/g1)*sqrt(2.*pi/z1)
 
       endif
-      gammafuncnew=f1
+      GAMMAICEFUNC=f1
 
 !----------------------------------------------
 !-------  EIGAMMA, arguments = a, x
@@ -5576,9 +5576,9 @@
    
 ! integral(x to infty) t^a-1 exp(-t) dt
    
-      gammaupnew=(gammafuncnew*(1-x**a*eigamma))
+      GAMMAICE=(GAMMAICEFUNC*(1-x**a*eigamma))
    
-      end function gammaupnew
+      end function GAMMAICE
 
 !+---+-----------------------------------------------------------------+
 
@@ -5597,14 +5597,14 @@
     Real, intent(out) :: N, Q
     Real :: Nice, Qice, Ngraup, Qgraup
 
-    Nice = max(1.,(n0i*gammaupnew(alpha+1.,lambi*dthresh))/  &
+    Nice = max(1.,(n0i*GAMMAICE(alpha+1.,lambi*dthresh))/  &
       (lambi**(alpha+1.)))
-    Qice = max(0., (ci*n0i*gammaupnew(di+alpha+1.,lambi*dthresh))/  &
+    Qice = max(0., (ci*n0i*GAMMAICE(di+alpha+1.,lambi*dthresh))/  &
       (lambi**(di+alpha+1.)))
 
-    Ngraup = max(1.,(n0g*gammaupnew(alpha+1.,lambg*dthresh))/  &
+    Ngraup = max(1.,(n0g*GAMMAICE(alpha+1.,lambg*dthresh))/  &
       (lambg**(alpha+1.)))
-    Qgraup = max(0., (cg*n0g*gammaupnew(dg+alpha+1.,lambg*dthresh))/  &
+    Qgraup = max(0., (cg*n0g*GAMMAICE(dg+alpha+1.,lambg*dthresh))/  &
       (lambg**(dg+alpha+1.)))
 
     N = Nice + Ngraup + Nsnow
