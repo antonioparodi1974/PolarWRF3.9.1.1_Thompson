@@ -458,7 +458,7 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
    LOGICAL,  OPTIONAL,   INTENT(IN   )    :: channel_switch
    REAL, OPTIONAL,  INTENT(INOUT   ) :: naer  ! aerosol number concentration (/kg)
    REAL, DIMENSION( ims:ime, jms:jme ), INTENT(IN) , OPTIONAL :: qnwfa2d      ! Added by G. Thompson
-   REAL, DIMENSION( ims:ime, kms:kme, jms:jme ), INTENT(IN) :: nisg80, qisg80      ! GYoung
+   REAL, DIMENSION( ims:ime, kms:kme, jms:jme ), INTENT(INOUT) :: nisg80, qisg80      ! GYoung
    REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                  &
          OPTIONAL,                                                &
          INTENT(INOUT ) ::                                        &
@@ -564,14 +564,14 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
 !---------------------------------------------------------------------
 
    ! GYoung added new mphys variables for large ice calculations
-   ! DO J = jts, min(jde-1,jte)
-   !     DO K = kts, kte-1
-   !        DO I = its, min(ide-1,ite)
-   !           nisg80(i,k,j) = 0.
-   !           qisg80(i,k,j) = 0.                   
-   !        ENDDO
-   !     ENDDO
-   ! ENDDO
+    DO J = jts, min(jde-1,jte)
+        DO K = kts, kte-1
+           DO I = its, min(ide-1,ite)
+              nisg80(i,k,j) = 0.
+              qisg80(i,k,j) = 0.                   
+           ENDDO
+        ENDDO
+    ENDDO
 
 
 !---------------------------------------------------------------------
@@ -792,8 +792,8 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
                      has_reqc=has_reqc,                  & ! G. Thompson
                      has_reqi=has_reqi,                  & ! G. Thompson
                      has_reqs=has_reqs,                  & ! G. Thompson
-   !                  NISG80=nisg80,                      &  ! GYoung
-   !                  QISG80=qisg80,                      &  ! GYoung                       
+                     nisg80=nisg80,                      &  ! GYoung
+                     qisg80=qisg80,                      &  ! GYoung                       
                  IDS=ids,IDE=ide, JDS=jds,JDE=jde, KDS=kds,KDE=kde, &
                  IMS=ims,IME=ime, JMS=jms,JME=jme, KMS=kms,KME=kme, &
                  ITS=its,ITE=ite, JTS=jts,JTE=jte, KTS=kts,KTE=kte)
@@ -852,8 +852,8 @@ REAL, DIMENSION( ims:ime, kms:kme, jms:jme ),                        &
                      has_reqc=has_reqc,                  & ! G. Thompson
                      has_reqi=has_reqi,                  & ! G. Thompson
                      has_reqs=has_reqs,                  & ! G. Thompson
-   !                  NISG80=nisg80,                      &  ! GYoung
-   !                  QISG80=qisg80,                      &  ! GYoung                       
+                     nisg80=nisg80,                      &  ! GYoung
+                     qisg80=qisg80,                      &  ! GYoung                       
                  IDS=ids,IDE=ide, JDS=jds,JDE=jde, KDS=kds,KDE=kde, &
                  IMS=ims,IME=ime, JMS=jms,JME=jme, KMS=kms,KME=kme, &
                  ITS=its,ITE=ite, JTS=jts,JTE=jte, KTS=kts,KTE=kte)

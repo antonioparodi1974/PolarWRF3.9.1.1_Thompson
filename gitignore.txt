@@ -28,7 +28,6 @@ tarfiles/*
 *.a
 *.backup
 *.f90
-WPS-4.0.1/
 gitignore.txt
 met_em*
 wrf_input*
@@ -54,6 +53,12 @@ fseeko_test
 gen_comms.c
 registry
 namelist.input.backup*
+p3_lookup_table_1.dat
+README.namelist
+diffwrf
+Registry
+WRFV3/external/io_grib1/io_grib1.f90
+WRFV3/external/io_grib_share/io_grib_share.f90
 
 #Ignore WPS/
 WPS/*

@@ -60,6 +60,7 @@
       INTEGER, PARAMETER, PRIVATE:: IFDRY = 0
       REAL, PARAMETER, PRIVATE:: T_0 = 273.15
       REAL, PARAMETER, PRIVATE:: PI = 3.1415926536
+      REAL, PARAMETER, PRIVATE :: QSMLL_DG = 1e-8 ! Small value for diagnostics, GYoung
 
 !..Densities of rain, snow, graupel, and cloud ice.
       REAL, PARAMETER, PRIVATE:: rho_w = 1000.0
@@ -1005,7 +1006,7 @@
 !..This is a wrapper routine designed to transfer values from 3D to 1D.
 !+---+-----------------------------------------------------------------+
       SUBROUTINE mp_gt_driver(qv, qc, qr, qi, qs, qg, ni, nr, nc,       &
-                              nwfa, nifa, nwfa2d,                       &
+                              nwfa, nifa, nwfa2d,        &
                               th, pii, p, w, dz, dt_in, itimestep,      &
                               RAINNC, RAINNCV, &
                               SNOWNC, SNOWNCV, &
@@ -1016,6 +1017,7 @@
                               refl_10cm, diagflag, do_radar_ref,      &
                               re_cloud, re_ice, re_snow,              &
                               has_reqc, has_reqi, has_reqs,           &
+                              nisg80, qisg80,                         &
                               ids,ide, jds,jde, kds,kde, &             ! domain dims
                               ims,ime, jms,jme, kms,kme, &             ! memory dims
                               its,ite, jts,jte, kts,kte)               ! tile dims
@@ -1030,6 +1032,8 @@
                           qv, qc, qr, qi, qs, qg, ni, nr, th
       REAL, DIMENSION(ims:ime, kms:kme, jms:jme), OPTIONAL, INTENT(INOUT):: &
                           nc, nwfa, nifa
+       REAL, DIMENSION(ims:ime, kms:kme, jms:jme), INTENT(INOUT):: &
+                           nisg80, qisg80                                        ! GYoung                         
       REAL, DIMENSION(ims:ime, jms:jme), OPTIONAL, INTENT(IN):: nwfa2d
       REAL, DIMENSION(ims:ime, kms:kme, jms:jme), INTENT(INOUT):: &
                           re_cloud, re_ice, re_snow
@@ -1055,6 +1059,7 @@
                           nr1d, nc1d, nwfa1d, nifa1d,                   &
                           t1d, p1d, w1d, dz1d, rho, dBZ
       REAL, DIMENSION(kts:kte):: re_qc1d, re_qi1d, re_qs1d
+      REAL, DIMENSION(kts:kte):: nisg80_1D, qisg80_1D     !G Young     
 #if ( WRF_CHEM == 1 )
       REAL, DIMENSION(kts:kte):: &
                           rainprod1d, evapprod1d
@@ -1163,6 +1168,8 @@
                nc1d(k) = nc(i,k,j)
                nwfa1d(k) = nwfa(i,k,j)
                nifa1d(k) = nifa(i,k,j)
+               nisg80_1D(k) = nisg80(i,k,j) ! GYoung
+               qisg80_1D(k) = qisg80(i,k,j) ! GYoung
             enddo
             nwfa1 = nwfa2d(i,j)
          else
@@ -1176,11 +1183,13 @@
          endif
 
          call mp_thompson(qv1d, qc1d, qi1d, qr1d, qs1d, qg1d, ni1d,     &
-                      nr1d, nc1d, nwfa1d, nifa1d, t1d, p1d, w1d, dz1d,  &
-                      pptrain, pptsnow, pptgraul, pptice, &
+                      nr1d, nc1d, nwfa1d, nifa1d, & 
+                      t1d, p1d, w1d, dz1d, pptrain, pptsnow, pptgraul,  &
+                      pptice, &
 #if ( WRF_CHEM == 1 )
                       rainprod1d, evapprod1d, &
 #endif
+                      nisg80_1D, qisg80_1D, &
                       kts, kte, dt, i, j)
 
          pcp_ra(i,j) = pptrain
@@ -1212,6 +1221,8 @@
                nc(i,k,j) = nc1d(k)
                nwfa(i,k,j) = nwfa1d(k)
                nifa(i,k,j) = nifa1d(k)
+               nisg80(i,k,j) = nisg80_1D(k)   ! G Young
+               qisg80(i,k,j) = qisg80_1D(k)   ! G Young
             enddo
          endif
 
@@ -1371,11 +1382,13 @@
 !+---+-----------------------------------------------------------------+
 !
       subroutine mp_thompson (qv1d, qc1d, qi1d, qr1d, qs1d, qg1d, ni1d, &
-                          nr1d, nc1d, nwfa1d, nifa1d, t1d, p1d, w1d, dzq, &
+                          nr1d, nc1d, nwfa1d, nifa1d, &
+                          t1d, p1d, w1d, dzq, &
                           pptrain, pptsnow, pptgraul, pptice, &
 #if ( WRF_CHEM == 1 )
                           rainprod, evapprod, &
 #endif
+                          nisg80_1D, qisg80_1D, &
                           kts, kte, dt, ii, jj)
 
       implicit none
@@ -1385,6 +1398,8 @@
       REAL, DIMENSION(kts:kte), INTENT(INOUT):: &
                           qv1d, qc1d, qi1d, qr1d, qs1d, qg1d, ni1d, &
                           nr1d, nc1d, nwfa1d, nifa1d, t1d
+      REAL, DIMENSION(kts:kte), INTENT(INOUT):: &
+                          nisg80_1D, qisg80_1D      ! G Young                        
       REAL, DIMENSION(kts:kte), INTENT(IN):: p1d, w1d, dzq
       REAL, INTENT(INOUT):: pptrain, pptsnow, pptgraul, pptice
       REAL, INTENT(IN):: dt
@@ -1436,7 +1451,8 @@
       REAL, DIMENSION(kts:kte):: diffu, visco, vsc2, &
            tcond, lvap, ocp, lvt2
 
-      DOUBLE PRECISION, DIMENSION(kts:kte):: ilamr, ilamg, N0_r, N0_g
+      DOUBLE PRECISION, DIMENSION(kts:kte):: ilamr, ilamg, N0_r, N0_g, &
+           N0_i, N0_s
       REAL, DIMENSION(kts:kte):: mvd_r, mvd_c
       REAL, DIMENSION(kts:kte):: smob, smo2, smo1, smo0, &
            smoc, smod, smoe, smof
@@ -1445,7 +1461,7 @@
 
       REAL:: rgvm, delta_tp, orho, lfus2
       REAL, DIMENSION(5):: onstep
-      DOUBLE PRECISION:: N0_exp, N0_min, lam_exp, lamc, lamr, lamg
+      DOUBLE PRECISION:: N0_exp, N0_min, lam_exp, lamc, lamr, lamg, lams
       DOUBLE PRECISION:: lami, ilami, ilamc
       REAL:: xDc, Dc_b, Dc_g, xDi, xDr, xDs, xDg, Ds_m, Dg_m
       DOUBLE PRECISION:: Dr_star, Dc_star
@@ -3568,6 +3584,45 @@
          if (qs1d(k) .le. R1) qs1d(k) = 0.0
          qg1d(k) = qg1d(k) + qgten(k)*DT
          if (qg1d(k) .le. R1) qg1d(k) = 0.0
+
+
+
+!+---+-----------------------------------------------------------------+
+!+---+-----------------------------------------------------------------+
+!.. Calculation of large ice, snow, and graupel for comparison with
+!.. optical array shadow probes. Hard coded at sizes >80um for comparison
+!.. with 2DS measurements in this instance. Only need to calculate via
+!.. calc_icesize for graupel and ice, snow hardcoded to be >200um.
+!..            -- GYoung
+!+---+-----------------------------------------------------------------+
+!+---+-----------------------------------------------------------------+
+!.. Ice size distribution shape parameters (assumes gamma)
+         lami = (am_i*cig(2)*oig1*ni1d(k)/qi1d(k))**obmi
+         N0_i(k) = ni1d(k)*lami
+
+!.. Graupel size distribution parameters (assumes gamma)
+         ygra1 = 4.31 + alog10(max(5.E-5, rg(k)))
+         zans1 = 3.1 + (100./(300.*xslw1*ygra1/(10./xslw1+1.+0.25*ygra1)+30.+10.*ygra1))
+         N0_exp = 10.**(zans1)
+         N0_exp = MAX(DBLE(gonv_min), MIN(N0_exp, DBLE(gonv_max)))
+         N0_min = MIN(N0_exp, N0_min)
+         N0_exp = N0_min
+         lam_exp = (N0_exp*am_g*cgg(1)/rg(k))**oge1
+         lamg = lam_exp * (cgg(3)*ogg2*ogg1)**obmg
+         N0_g(k) = N0_exp/(cgg(2)*lam_exp) * lamg**cge(2)
+
+! If non-negligible ice, snow, or graupel mass is PRESENT
+      if ( qi1d(K).gt.qsmll_dg .or. qs1d(k).gt.qsmll_dg .or. &
+        qg1d(k).gt.qsmll_dg) then
+         Call calc_icesize(N0_i(k), lami, N0_g(k), &
+          lamg, smo0(k), qs1d(k), 0., am_i, bm_i, am_g, bm_g, &
+          80.e-6,      &  ! Particles >80um
+          nisg80_1D(k), qisg80_1D(k))
+      end if
+
+         ! nisg80_1D = 0.0
+         ! qisg80_1D = 0.0
+
       enddo
 
       end subroutine mp_thompson
@@ -3618,7 +3673,7 @@
             INQUIRE(63,opened=lopen)
             IF (lopen) THEN
               IF( force_read_thompson ) THEN
-                CALL wrf_error_fatal("Error reading qr_acr_qg.dat. Aborting because force_read_thompson is .true.")
+                CALL wrf_error_fatal("Error reading qrf_acr_qg.dat. Aborting because force_read_thompson is .true.")
               ENDIF
               CLOSE(63)
             ELSE
@@ -5430,6 +5485,134 @@
       end subroutine calc_refl10cm
 !
 !+---+-----------------------------------------------------------------+
+
+!+---+-----------------------------------------------------------------+
+    ! GYoung - function for ice size calculations
+      real function GAMMAICE(a,x)
+      
+      implicit none    
+  
+      real :: a
+      double precision :: x
+      real :: eigamma, GAMMAICEFUNC
+!----------------------------------------------
+!-------  GAMMAICEFUNC, argument = a
+!----------------------------------------------
+!      real :: x1 ! DUMMY VARIABLE
+      real :: f1,g1,z1
+      REAL, PARAMETER :: pi=3.14159
+
+!----------------------------------------------
+!-------  EIGAMMA, arguments = a, x
+!----------------------------------------------
+      
+      real :: p,g,b,z,f
+      integer :: j
+      
+!----------------------------------------------
+!-------  GAMMAICEFUNC, argument = a
+!----------------------------------------------
+
+      f1=huge(a)
+      g1=1
+      z1=a
+      if ((z1+int(abs(z1))).ne.0)then
+       do while(z1<3)
+          ! Lets use a recursion relation for Gamma functions
+          ! to get a large argument and use Stirlings formula
+          g1=g1*z1
+          z1=z1+1
+       end do
+
+       ! This is just stirlings formula...
+       f1=(1.-2.*(1-2./(3.*z1*z1))/(7.*z1*z1))/(30.*z1*z1)
+       f1=(1.-f1)/(12.*z1)+z1*(log(z1)-1)
+       f1=(exp(f1)/g1)*sqrt(2.*pi/z1)
+
+      endif
+      GAMMAICEFUNC=f1
+
+!----------------------------------------------
+!-------  EIGAMMA, arguments = a, x
+!----------------------------------------------
+
+      if (x < 100.0) then     
+ 
+      g=1
+      p=1
+      b=a
+      do while(b<=1.)
+         b=b+1
+         g=g*x
+         p=p*b+g
+      end do
+      b=b+1
+
+      j=int(5.*(3.+abs(x))/2.)
+      f=1./(j+b-x)
+
+      do while(j/=0)
+         j=j-1
+         f=(f*x+1.)/(j+b)
+      end do
+
+      p=p+f*g*x
+      g=(1.-(2./(7.*b*b))*(1.-2./(3.*b*b)))/(30.*b*b)
+      g=(g-1.)/(12.*b)-b*(log(b)-1.)
+
+      f=p*exp(g-x)*sqrt(b/(2.*pi))
+
+      eigamma=f
+   
+      else
+     
+      eigamma=0.0
+
+      endif
+
+!----------------------------------------------
+!-------  GAMMAUP
+!----------------------------------------------
+   
+! integral(x to infty) t^a-1 exp(-t) dt
+   
+      GAMMAICE=(GAMMAICEFUNC*(1-x**a*eigamma))
+   
+      end function GAMMAICE
+
+!+---+-----------------------------------------------------------------+
+
+!+---+-----------------------------------------------------------------+
+
+      Subroutine calc_icesize(n0i, lambi, n0g, lambg, Nsnow, Qsnow, &
+        alpha, ci, di, cg, dg, dthresh, N, Q)
+
+      ! Calculate number and mass of particles greater than threshold diameter
+      
+      implicit none
+
+    Real, intent(in) :: alpha, ci, di, cg, dg, dthresh, Nsnow, Qsnow
+    !Real, intent(in) :: lambi, lambg
+    DOUBLE PRECISION, intent(in) :: n0i, n0g, lambi, lambg
+    Real, intent(out) :: N, Q
+    Real :: Nice, Qice, Ngraup, Qgraup
+
+    Nice = max(1.,(n0i*GAMMAICE(alpha+1.,lambi*dthresh))/  &
+      (lambi**(alpha+1.)))
+    Qice = max(0., (ci*n0i*GAMMAICE(di+alpha+1.,lambi*dthresh))/  &
+      (lambi**(di+alpha+1.)))
+
+    Ngraup = max(1.,(n0g*GAMMAICE(alpha+1.,lambg*dthresh))/  &
+      (lambg**(alpha+1.)))
+    Qgraup = max(0., (cg*n0g*GAMMAICE(dg+alpha+1.,lambg*dthresh))/  &
+      (lambg**(dg+alpha+1.)))
+
+    N = Nice + Ngraup + Nsnow
+    Q = Qice + Qgraup + Qsnow
+
+      End Subroutine calc_icesize
+
+!+---+-----------------------------------------------------------------+  
 
 !+---+-----------------------------------------------------------------+
 END MODULE module_mp_thompson
