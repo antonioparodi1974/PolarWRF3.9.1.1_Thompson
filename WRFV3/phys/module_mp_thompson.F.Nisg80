@@ -5590,9 +5590,9 @@
       
       implicit none
 
-    Real, intent(in) :: alpha, ci, di, cg, dg, dthresh, Nsnow, Qsnow
+    Real, intent(in) :: alpha, ci, di, cg, dg, Nsnow, Qsnow
     !Real, intent(in) :: lambi, lambg
-    DOUBLE PRECISION, intent(in) :: n0i, n0g, lambi, lambg 
+    DOUBLE PRECISION, intent(in) :: n0i, n0g, lambi, lambg, dthresh 
     Real, intent(out) :: N, Q
     DOUBLE PRECISION :: Nice, Qice, Ngraup, Qgraup
 
