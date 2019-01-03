@@ -59,6 +59,12 @@ diffwrf
 Registry
 WRFV3/external/io_grib1/io_grib1.f90
 WRFV3/external/io_grib_share/io_grib_share.f90
+wrfinput_d*
+wrfbdy*
+wrfout.log
+realout.log
+rsl.error.*
+rsl.out.*
 
 #Ignore WPS/
 WPS/*
